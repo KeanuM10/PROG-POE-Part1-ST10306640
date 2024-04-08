@@ -3,12 +3,14 @@ using Microsoft.VisualBasic;
 
 namespace IngProgram
 {
+    //Variable Decleration
     public class Ingredients
     {
         public string IngName;
         public int IngQuantity;
         public string UoM;
 
+        //Variables now initialzed
         public Ingredients(string IngName, int IngQuantity, string UoM)
         {
             this.IngName = IngName;
@@ -24,6 +26,7 @@ namespace IngProgram
             Console.WriteLine("Please enter number of ingredients");
             int steps = Int32.Parse(Console.ReadLine());
 
+            //Decleration of ingredients array
             Ingredients[] IngArray = new Ingredients[steps];
 
             SaveIngredients(IngArray);
@@ -40,7 +43,7 @@ namespace IngProgram
         {
             int x = 1;
             for (int i = 0; i < IngArray.Length; i++)
-            {    
+            {
                 Console.WriteLine("Please enter name of ingredient: " + x++);
                 string IngName = Console.ReadLine();
 
@@ -56,21 +59,28 @@ namespace IngProgram
             }
         }
 
-        public static void FactorIngredients(Ingredients[] IngArray) {
+        //FactorIngredients() allows user to scale the factor of IngQuantity and applies the change
+        public static void FactorIngredients(Ingredients[] IngArray)
+        {
             Console.WriteLine("Would you like to scale the factor of your ingredients? Type Yes or No");
             var factorCheck = Console.ReadLine();
             factorCheck.ToLower();
 
-            if(factorCheck == "yes" || factorCheck == "y") {
+            //if statment allowing user to scale quantity if needed
+            if (factorCheck == "yes" || factorCheck == "y")
+            {
                 Console.WriteLine("Please enter your factor scale:");
                 int factorScale = Int32.Parse(Console.ReadLine());
                 
-                foreach(var ingredient in IngArray){
-                double updatedQuantity =  ingredient.IngQuantity * factorScale;
-                Console.WriteLine("Here is the updated recipe: " + $"{updatedQuantity} {ingredient.UoM} of {ingredient.IngName}");
+                //foreach statement looping through IngArray to apply factors and display updated recipe
+                foreach (var ingredient in IngArray)
+                {
+                    double updatedQuantity = ingredient.IngQuantity * factorScale;
+                    Console.WriteLine("Here is the updated recipe: " + $"{updatedQuantity} {ingredient.UoM} of {ingredient.IngName}");
                 }
             }
-            else {
+            else
+            {
                 Console.WriteLine("Proceeding to steps...");
             }
         }
