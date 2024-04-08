@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("POE-Part1-Code")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3117e09c4009a9c2db090bd6572be9c800a5840f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d92fd973e446d863f33089aeaaa7022b19d5ccc9")]
 [assembly: System.Reflection.AssemblyProductAttribute("POE-Part1-Code")]
 [assembly: System.Reflection.AssemblyTitleAttribute("POE-Part1-Code")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
