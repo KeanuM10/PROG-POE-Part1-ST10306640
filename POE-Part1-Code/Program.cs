@@ -47,6 +47,8 @@ namespace IngProgram
             UserSteps[] stepCount = new UserSteps[userStepCount];
             UserSteps(stepCount);
 
+            DisplayRecipe(IngArray, stepCount);
+
             FactorIngredients(IngArray);
 
             /*foreach( var ingredient in IngArray) {
@@ -86,6 +88,27 @@ namespace IngProgram
                 var stepWritten = Console.ReadLine();
                 stepCount[i] = new UserSteps(stepWritten);
             }
+        }
+
+        //DisplayRecipe method takes values from both arrays and displays the recipe and steps for recipe in a neat manner
+        public static void DisplayRecipe(Ingredients[] IngArray, UserSteps[] stepCount) {
+            Console.WriteLine("" + "\n" + 
+            "******************************" + "\n" +
+            "----------------------" + "\n" +
+            "Here is your recipe:" + "\n" +
+            "----------------------" + "\n");
+            foreach(var ingredient in IngArray) {
+                Console.WriteLine($"{ingredient.IngQuantity} {ingredient.UoM} - {ingredient.IngName}");;
+            }
+            Console.WriteLine("" + "\n" + 
+            "******************************" + "\n" +
+            "-------------------------" + "\n" +
+            "Here are the recipe steps:" + "\n" +
+            "-------------------------" + "\n");
+            foreach(var step in stepCount) {
+                Console.WriteLine($"{step.userStepCount}");
+            }
+            Console.WriteLine("******************************" + "\n");
         }
 
         //FactorIngredients() allows user to scale the factor of IngQuantity or follows necessary actions (exit or proceed to steps)
@@ -128,7 +151,7 @@ namespace IngProgram
                         foreach (var ingredient in IngArray)
                         {
                             double updatedQuantity = ingredient.IngQuantity * factorScale;
-                            Console.WriteLine("Here is the updated recipe: " + $"{updatedQuantity} {ingredient.UoM} - {ingredient.IngName}");
+                            Console.WriteLine($"{updatedQuantity} {ingredient.UoM} - {ingredient.IngName}");
                         }
                         factorScaleCheck = true;
                     }
