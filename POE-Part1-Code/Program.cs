@@ -24,10 +24,10 @@ namespace IngProgram
         public static void Main(string[] args)
         {
             Console.WriteLine("Please enter number of ingredients");
-            int steps = Int32.Parse(Console.ReadLine());
+            int ingCounter = Int32.Parse(Console.ReadLine());
 
             //Decleration of ingredients array
-            Ingredients[] IngArray = new Ingredients[steps];
+            Ingredients[] IngArray = new Ingredients[ingCounter];
 
             SaveIngredients(IngArray);
             FactorIngredients(IngArray);
@@ -59,29 +59,80 @@ namespace IngProgram
             }
         }
 
-        //FactorIngredients() allows user to scale the factor of IngQuantity and applies the change
+        //FactorIngredients() allows user to scale the factor of IngQuantity or follows necessary actions (exit or proceed to steps)
         public static void FactorIngredients(Ingredients[] IngArray)
         {
+            double factorScale;
+            bool factorScaleCheck = false;
+
             Console.WriteLine("Would you like to scale the factor of your ingredients? Type Yes or No");
             var factorCheck = Console.ReadLine();
             factorCheck.ToLower();
 
-            //if statment allowing user to scale quantity if needed
-            if (factorCheck == "yes" || factorCheck == "y")
+            //while statment ensuring user loops if incorrect values are used
+            while (factorScaleCheck == false)
             {
-                Console.WriteLine("Please enter your factor scale:");
-                int factorScale = Int32.Parse(Console.ReadLine());
-                
-                //foreach statement looping through IngArray to apply factors and display updated recipe
-                foreach (var ingredient in IngArray)
+                //if statment checking for valid input and then applying needed factor
+                if (factorCheck == "yes" || factorCheck == "y")
                 {
-                    double updatedQuantity = ingredient.IngQuantity * factorScale;
-                    Console.WriteLine("Here is the updated recipe: " + $"{updatedQuantity} {ingredient.UoM} of {ingredient.IngName}");
+                    Console.WriteLine("Please select your factor scale (Enter the corresponding letter): A: x0.5, B: x2, or C: x3");
+                    var factorValue = Console.ReadLine();
+                    factorValue.ToUpper();
+
+                    if (factorValue == "A")
+                    {
+                        factorScale = 0.5;
+                        Console.WriteLine("Here is the updated recipe: ");
+                        //foreach statement looping through IngArray to apply factors and display updated recipe
+                        foreach (var ingredient in IngArray)
+                        {
+                            double updatedQuantity = ingredient.IngQuantity * factorScale;
+                            Console.WriteLine($"{updatedQuantity} {ingredient.UoM} - {ingredient.IngName}");
+                        }
+                        factorScaleCheck = true;
+                    }
+                    else if (factorValue == "B")
+                    {
+                        factorScale = 2;
+                        Console.WriteLine("Here is the updated recipe: ");
+                        //foreach statement looping through IngArray to apply factors and display updated recipe
+                        foreach (var ingredient in IngArray)
+                        {
+                            double updatedQuantity = ingredient.IngQuantity * factorScale;
+                            Console.WriteLine("Here is the updated recipe: " + $"{updatedQuantity} {ingredient.UoM} - {ingredient.IngName}");
+                        }
+                        factorScaleCheck = true;
+                    }
+                    else if (factorValue == "C")
+                    {
+                        factorScale = 3;
+                        Console.WriteLine("Here is the updated recipe: ");
+                        //foreach statement looping through IngArray to apply factors and display updated recipe
+                        foreach (var ingredient in IngArray)
+                        {
+                            double updatedQuantity = ingredient.IngQuantity * factorScale;
+                            Console.WriteLine("Here is the updated recipe: " + $"{updatedQuantity} {ingredient.UoM} - {ingredient.IngName}");
+                        }
+
+                        factorScaleCheck = true;
+                    }
+                    //else if allowing user to retry, or exit program if an invalid letter is being selected
+                    else if (factorValue != "A" || factorValue != "B" || factorValue != "C")
+                    {
+                        Console.WriteLine("Please enter a valid letter or 0 to exit the program");
+                        var exitIng = Int32.Parse(Console.ReadLine());
+                        factorScaleCheck = false;
+
+                        if(exitIng == 0) {
+                            Environment.Exit(0);
+                        }
+                    }
+                    //Main if statment else block
+                    else
+                    {
+                        Console.WriteLine("Proceeding to steps...");
+                    }
                 }
-            }
-            else
-            {
-                Console.WriteLine("Proceeding to steps...");
             }
         }
     }
