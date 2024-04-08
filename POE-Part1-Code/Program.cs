@@ -19,6 +19,17 @@ namespace IngProgram
         }
     }
 
+    public class UserSteps
+    {
+        public string userStepCount;
+
+        public UserSteps(string userStepCount)
+        {
+            this.userStepCount = userStepCount;
+        }
+    }
+
+
     class IngredientProgram
     {
         public static void Main(string[] args)
@@ -28,8 +39,14 @@ namespace IngProgram
 
             //Decleration of ingredients array
             Ingredients[] IngArray = new Ingredients[ingCounter];
-
             SaveIngredients(IngArray);
+
+            Console.WriteLine("Please enter the number of steps in recipe: ");
+            var userStepCount = Int32.Parse(Console.ReadLine());
+
+            UserSteps[] stepCount = new UserSteps[userStepCount];
+            UserSteps(stepCount);
+
             FactorIngredients(IngArray);
 
             /*foreach( var ingredient in IngArray) {
@@ -56,6 +73,18 @@ namespace IngProgram
 
                 //stores user input into the array
                 IngArray[i] = new Ingredients(IngName, IngQuantity, UoM);
+            }
+        }
+
+        //UserSteps methods uses stepCount and allows for steps to be written
+        public static void UserSteps(UserSteps[] stepCount)
+        {
+            int x = 1;
+            for (int i = 0; i < stepCount.Length; i++)
+            {
+                Console.WriteLine("Please enter step " + x++ + " for this recipe");
+                var stepWritten = Console.ReadLine();
+                stepCount[i] = new UserSteps(stepWritten);
             }
         }
 
@@ -119,19 +148,21 @@ namespace IngProgram
                     //else if allowing user to retry, or exit program if an invalid letter is being selected
                     else if (factorValue != "A" || factorValue != "B" || factorValue != "C")
                     {
-                        Console.WriteLine("Please enter a valid letter or 0 to exit the program");
-                        var exitIng = Int32.Parse(Console.ReadLine());
+                        Console.WriteLine("Please enter a valid letter or Z to exit the program");
+                        string exitIng = Console.ReadLine();
                         factorScaleCheck = false;
 
-                        if(exitIng == 0) {
+                        if (exitIng == "Z" || exitIng == "z")
+                        {
                             Environment.Exit(0);
                         }
                     }
                     //Main if statment else block
-                    else
-                    {
-                        Console.WriteLine("Proceeding to steps...");
-                    }
+                }
+                else
+                {
+                    Console.WriteLine("Factor skipped...");
+                    factorScaleCheck = true;
                 }
             }
         }
