@@ -52,7 +52,7 @@ namespace IngProgram
 
             FactorIngredients(IngArray);
 
-
+            ClearData(IngArray, stepCount);
         }
 
         //SaveIngredients() allows for user input and saves the Ingredients info to the array
@@ -89,21 +89,24 @@ namespace IngProgram
         }
 
         //DisplayRecipe method takes values from both arrays and displays the recipe and steps for recipe in a neat manner
-        public static void DisplayRecipe(Ingredients[] IngArray, UserSteps[] stepCount) {
-            Console.WriteLine("" + "\n" + 
+        public static void DisplayRecipe(Ingredients[] IngArray, UserSteps[] stepCount)
+        {
+            Console.WriteLine("" + "\n" +
             "******************************" + "\n" +
-            "----------------------" + "\n" +
+            "--------------------" + "\n" +
             "Here is your recipe:" + "\n" +
-            "----------------------" + "\n");
-            foreach(var ingredient in IngArray) {
-                Console.WriteLine($"{ingredient.IngQuantity} {ingredient.UoM} - {ingredient.IngName}");;
+            "--------------------" + "\n");
+            foreach (var ingredient in IngArray)
+            {
+                Console.WriteLine($"{ingredient.IngQuantity} {ingredient.UoM} - {ingredient.IngName}"); ;
             }
-            Console.WriteLine("" + "\n" + 
+            Console.WriteLine("" + "\n" +
             "******************************" + "\n" +
-            "-------------------------" + "\n" +
+            "---------------------------" + "\n" +
             "Here are the recipe steps:" + "\n" +
-            "-------------------------" + "\n");
-            foreach(var step in stepCount) {
+            "---------------------------" + "\n");
+            foreach (var step in stepCount)
+            {
                 Console.WriteLine($"{step.userStepCount}");
             }
             Console.WriteLine("******************************" + "\n");
@@ -117,7 +120,7 @@ namespace IngProgram
 
             Console.WriteLine("Would you like to scale the factor of your ingredients? Type Yes or No");
             var factorCheck = Console.ReadLine();
-            factorCheck.ToLower();
+            factorCheck = factorCheck.ToLower();
 
             //while statment ensuring user loops if incorrect values are used
             while (factorScaleCheck == false)
@@ -127,7 +130,7 @@ namespace IngProgram
                 {
                     Console.WriteLine("Please select your factor scale (Enter the corresponding letter): A: x0.5, B: x2, or C: x3");
                     var factorValue = Console.ReadLine();
-                    factorValue.ToUpper();
+                    factorValue = factorValue.ToUpper();
 
                     if (factorValue == "A")
                     {
@@ -171,7 +174,7 @@ namespace IngProgram
                     {
                         Console.WriteLine("Please enter a valid letter or Z to exit the program");
                         string exitIng = Console.ReadLine();
-                        
+
 
                         if (exitIng == "Z" || exitIng == "z")
                         {
@@ -186,21 +189,46 @@ namespace IngProgram
                     Console.WriteLine("Factor skipped...");
                     factorScaleCheck = true;
                 }
-
-                Console.WriteLine("Would you like to reset your quantities? Type R to reset");
+                //Allows user to reset quantities back to original input
+                Console.WriteLine("Would you like to reset your quantities? Type R to reset or anything to skip");
                 string resetCheck = Console.ReadLine();
-                resetCheck.ToUpper();
+                resetCheck = resetCheck.ToUpper();
 
-                Console.WriteLine("Here is your recipe with reset values: ");
-
-                if(resetCheck == "R") 
+                if (resetCheck == "R")
                 {
-                    foreach(var value in IngArray) 
+                    Console.WriteLine("Here is your recipe with reset values: ");
+                    //resets quantities and displays the now new values
+                    foreach (var value in IngArray)
                     {
-                    double updatedValues = value.IngQuantity;
-                    Console.WriteLine($"{updatedValues} {value.UoM} - {value.IngName}");
+                        double originalQuan = value.IngQuantity;
+                        Console.WriteLine($"{originalQuan} {value.UoM} - {value.IngName}");
                     }
                 }
+            }
+        }
+
+        //ClearData clears data from IngArray and UserSteps, allowing for a clean start.
+        public static void ClearData(Ingredients[] IngArray, UserSteps[] userSteps)
+        {
+            Console.WriteLine("Would you like to clear and start a new recipe? type \"new\" or anything else to close application");
+            string newRecipe = Console.ReadLine();
+            newRecipe = newRecipe.ToUpper();
+
+            //Clears arrays
+            if (newRecipe == "NEW")
+            {
+                Console.WriteLine("Please enter number of ingredients");
+                int ingCounter = Int32.Parse(Console.ReadLine());
+
+                IngArray = new Ingredients[ingCounter];
+                userSteps = new UserSteps[0];
+
+                SaveIngredients(IngArray);
+                //If user chooses not to start a new recipe, application will close    
+            }
+            else
+            {
+                Environment.Exit(0);
             }
         }
     }
