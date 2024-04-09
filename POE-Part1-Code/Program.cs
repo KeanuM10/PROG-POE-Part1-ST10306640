@@ -49,12 +49,10 @@ namespace IngProgram
 
             DisplayRecipe(IngArray, stepCount);
 
+
             FactorIngredients(IngArray);
 
-            /*foreach( var ingredient in IngArray) {
-             //"$" indicates string interpolation - replaces words within {} with actual values given
-             Console.WriteLine($"{ingredient.IngName}");
-            }*/
+
         }
 
         //SaveIngredients() allows for user input and saves the Ingredients info to the array
@@ -163,7 +161,7 @@ namespace IngProgram
                         foreach (var ingredient in IngArray)
                         {
                             double updatedQuantity = ingredient.IngQuantity * factorScale;
-                            Console.WriteLine("Here is the updated recipe: " + $"{updatedQuantity} {ingredient.UoM} - {ingredient.IngName}");
+                            Console.WriteLine($"{updatedQuantity} {ingredient.UoM} - {ingredient.IngName}");
                         }
 
                         factorScaleCheck = true;
@@ -173,12 +171,13 @@ namespace IngProgram
                     {
                         Console.WriteLine("Please enter a valid letter or Z to exit the program");
                         string exitIng = Console.ReadLine();
-                        factorScaleCheck = false;
+                        
 
                         if (exitIng == "Z" || exitIng == "z")
                         {
                             Environment.Exit(0);
                         }
+                        factorScaleCheck = false;
                     }
                     //Main if statment else block
                 }
@@ -187,8 +186,24 @@ namespace IngProgram
                     Console.WriteLine("Factor skipped...");
                     factorScaleCheck = true;
                 }
+
+                Console.WriteLine("Would you like to reset your quantities? Type R to reset");
+                string resetCheck = Console.ReadLine();
+                resetCheck.ToUpper();
+
+                Console.WriteLine("Here is your recipe with reset values: ");
+
+                if(resetCheck == "R") 
+                {
+                    foreach(var value in IngArray) 
+                    {
+                    double updatedValues = value.IngQuantity;
+                    Console.WriteLine($"{updatedValues} {value.UoM} - {value.IngName}");
+                    }
+                }
             }
         }
     }
 }
+
 
