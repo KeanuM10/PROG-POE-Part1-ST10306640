@@ -18,7 +18,7 @@ namespace IngProgram
             this.UoM = UoM;
         }
     }
-
+    //Variable Decleration
     public class UserSteps
     {
         public string userStepCount;
@@ -28,23 +28,24 @@ namespace IngProgram
             this.userStepCount = userStepCount;
         }
     }
-
     class IngredientProgram
     {
         public static void Main(string[] args)
         {
             try
             {
-                MainRepeat();
+                ProgramStart();
             }
             catch
             {
 
-                MainRepeat();
+                ProgramStart();
             }
         }
 
-        public static void MainRepeat()
+
+        //MainRepeat() Method declares needed arrays and call necessary methods, surrounded in a try catch for error handling.
+        public static void ProgramStart()
         {
             try
             {
@@ -58,6 +59,7 @@ namespace IngProgram
                 Console.WriteLine("Please enter the number of steps in recipe: ");
                 var userStepCount = Int32.Parse(Console.ReadLine());
 
+                //Decleration of step counter array
                 UserSteps[] stepCount = new UserSteps[userStepCount];
                 UserSteps(stepCount);
 
@@ -69,12 +71,13 @@ namespace IngProgram
             }
             catch
             {
+                //Main error handle, ensures system wont crash
                 Console.WriteLine("The system encountered an error, try again");
-                MainRepeat();
+                ProgramStart();
             }
         }
 
-        //SaveIngredients() allows for user input and saves the Ingredients info to the array
+        //SaveIngredients() allows for user input and saves the Ingredients info to the array.
         public static void SaveIngredients(Ingredients[] IngArray)
         {
             int x = 1;
@@ -86,7 +89,7 @@ namespace IngProgram
                     string IngName = Console.ReadLine();
                     if (IngName.Length == 0)
                     {
-                        Console.WriteLine("Please add a valid word");
+                        Console.WriteLine("Please add a valid word:");
                         SaveIngredients(IngArray);
                     }
 
@@ -105,6 +108,7 @@ namespace IngProgram
                     "8. - Custom Value");
                     string UoM = Console.ReadLine();
 
+                    //Switch case to convert user selection
                     switch (UoM)
                     {
                         case "1":
@@ -147,12 +151,14 @@ namespace IngProgram
             }
             catch
             {
+                //Error handling
                 Console.WriteLine("Oh no! That should not happen, please try again");
+                //Recall method
                 SaveIngredients(IngArray);
             }
         }
 
-        //UserSteps methods uses stepCount and allows for steps to be written
+        //UserSteps methods uses stepCount and saves user's steps to system temporarily (while running).
         public static void UserSteps(UserSteps[] stepCount)
         {
             int x = 1;
@@ -167,14 +173,17 @@ namespace IngProgram
             }
             catch
             {
+                //Error handling
                 Console.WriteLine("That doesn't look right :( lets give it another go");
+                //Recall method
                 UserSteps(stepCount);
             }
         }
 
-        //DisplayRecipe method takes values from both arrays and displays the recipe and steps for recipe in a neat manner
+        //DisplayRecipe method takes values from both arrays and displays the recipe and steps for recipe in a neat manner.
         public static void DisplayRecipe(Ingredients[] IngArray, UserSteps[] stepCount)
         {
+            //Set text colour to blue
             Console.ForegroundColor
             = ConsoleColor.Blue;
             try
@@ -201,21 +210,24 @@ namespace IngProgram
 
                     }
                     Console.WriteLine("******************************" + "\n");
-                    
                 }
-                Console.ForegroundColor
-                    = ConsoleColor.White;
             }
             catch
             {
+                //Error handling
+                Console.ForegroundColor
+                    = ConsoleColor.White;
                 Console.WriteLine("Something went wrong with the recipe display, please try again");
-                MainRepeat();
+                //Restarts program
+                ProgramStart();
             }
+            //Sets text colour back to white
             Console.ForegroundColor
                     = ConsoleColor.White;
         }
 
-        //FactorIngredients() allows user to scale the factor of IngQuantity or follows necessary actions (exit or proceed to steps)
+        //FactorIngredients() allows user to scale the factor of IngQuantity or follows necessary actions (exit or proceed to steps).
+        //UoM is scaled accordingly here, measurements are converted to more appropriate values.
         public static void FactorIngredients(Ingredients[] IngArray)
         {
             double factorScale;
@@ -289,7 +301,7 @@ namespace IngProgram
                                 updatedQuantity = updatedQuantity * 16;
                                 ingredient.UoM = "Tablespoon/s";
                             }
-                            
+
                             Console.WriteLine("");
                             Console.WriteLine($"{updatedQuantity} {ingredient.UoM} - {ingredient.IngName}");
                             Console.WriteLine("");
@@ -309,7 +321,7 @@ namespace IngProgram
                         foreach (var ingredient in IngArray)
                         {
                             double updatedQuantity = ingredient.IngQuantity * factorScale;
-                            
+
                             if (updatedQuantity >= 1000 && ingredient.UoM == "gram/s")
                             {
                                 updatedQuantity = updatedQuantity / 1000;
@@ -350,7 +362,7 @@ namespace IngProgram
                                 ingredient.UoM = "Tablespoon/s";
                             }
 
-                            
+
                             Console.WriteLine("");
                             Console.WriteLine($"{updatedQuantity} {ingredient.UoM} - {ingredient.IngName}");
                             Console.WriteLine("");
@@ -371,7 +383,7 @@ namespace IngProgram
                         foreach (var ingredient in IngArray)
                         {
                             double updatedQuantity = ingredient.IngQuantity * factorScale;
-                            
+
                             if (updatedQuantity >= 1000 && ingredient.UoM == "gram/s")
                             {
                                 updatedQuantity = updatedQuantity / 1000;
@@ -427,7 +439,6 @@ namespace IngProgram
                         Console.WriteLine("Please enter a valid letter or Z to exit the program");
                         string exitIng = Console.ReadLine();
 
-
                         if (exitIng == "Z" || exitIng == "z")
                         {
                             Environment.Exit(0);
@@ -438,7 +449,7 @@ namespace IngProgram
                 }
                 else
                 {
-                    Console.WriteLine("Factor skipped...");
+                    Console.WriteLine("No Factor applied to quantities");
                     factorScaleCheck = true;
                 }
                 //Allows user to reset quantities back to original input
@@ -448,13 +459,20 @@ namespace IngProgram
 
                 if (resetCheck == "R")
                 {
-                    Console.WriteLine("Here is your recipe with reset values: ");
+                    Console.ForegroundColor 
+                            = ConsoleColor.Magenta;
+                    
+                    Console.WriteLine("Here is the recipe with the reset values: ");
                     //resets quantities and displays the now new values
                     foreach (var value in IngArray)
                     {
                         double originalQuan = value.IngQuantity;
+                        Console.WriteLine("");
                         Console.WriteLine($"{originalQuan} {value.UoM} - {value.IngName}");
+                        Console.WriteLine("");
                     }
+                    Console.ForegroundColor
+                            = ConsoleColor.White;
                 }
             }
         }
@@ -469,7 +487,7 @@ namespace IngProgram
             //Clears arrays
             if (newRecipe == "NEW")
             {
-                MainRepeat();
+                ProgramStart();
 
                 //If user chooses not to start a new recipe, application will close    
             }
