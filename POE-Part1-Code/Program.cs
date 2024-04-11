@@ -7,11 +7,11 @@ namespace IngProgram
     public class Ingredients
     {
         public string IngName;
-        public int IngQuantity;
+        public double IngQuantity;
         public string UoM;
 
         //Variables now initialzed
-        public Ingredients(string IngName, int IngQuantity, string UoM)
+        public Ingredients(string IngName, double IngQuantity, string UoM)
         {
             this.IngName = IngName;
             this.IngQuantity = IngQuantity;
@@ -33,35 +33,42 @@ namespace IngProgram
     {
         public static void Main(string[] args)
         {
-            try {
+            try
+            {
                 MainRepeat();
-            } catch {
-                
+            }
+            catch
+            {
+
                 MainRepeat();
             }
         }
 
-        public static void MainRepeat() {
-            try{
-            Console.WriteLine("Please enter number of ingredients");
-            int ingCounter = Int32.Parse(Console.ReadLine());
+        public static void MainRepeat()
+        {
+            try
+            {
+                Console.WriteLine("Please enter number of ingredients");
+                int ingCounter = Int32.Parse(Console.ReadLine());
 
-            //Decleration of ingredients array
-            Ingredients[] IngArray = new Ingredients[ingCounter];
-            SaveIngredients(IngArray);
+                //Decleration of ingredients array
+                Ingredients[] IngArray = new Ingredients[ingCounter];
+                SaveIngredients(IngArray);
 
-            Console.WriteLine("Please enter the number of steps in recipe: ");
-            var userStepCount = Int32.Parse(Console.ReadLine());
+                Console.WriteLine("Please enter the number of steps in recipe: ");
+                var userStepCount = Int32.Parse(Console.ReadLine());
 
-            UserSteps[] stepCount = new UserSteps[userStepCount];
-            UserSteps(stepCount);
+                UserSteps[] stepCount = new UserSteps[userStepCount];
+                UserSteps(stepCount);
 
-            DisplayRecipe(IngArray, stepCount);
+                DisplayRecipe(IngArray, stepCount);
 
-            FactorIngredients(IngArray);
+                FactorIngredients(IngArray);
 
-            ClearData(IngArray, stepCount);
-            } catch {
+                ClearData(IngArray, stepCount);
+            }
+            catch
+            {
                 Console.WriteLine("The system encountered an error, try again");
                 MainRepeat();
             }
@@ -77,20 +84,61 @@ namespace IngProgram
                 {
                     Console.WriteLine("Please enter name of ingredient: " + x++);
                     string IngName = Console.ReadLine();
-                    if(IngName.Length == 0) {
+                    if (IngName.Length == 0)
+                    {
                         Console.WriteLine("Please add a valid word");
                         SaveIngredients(IngArray);
                     }
 
                     //Turned to a var as input will be mixed between string and int
                     Console.WriteLine("Please enter quantity of: " + IngName);
-                    int IngQuantity = Int32.Parse(Console.ReadLine());
+                    double IngQuantity = Convert.ToDouble(Console.ReadLine());
 
-                    Console.WriteLine("Please enter Unit of Measurment for: " + IngName);
+                    Console.WriteLine("Please select a Unit of Measurment for: " + IngName + "\n" +
+                    "1. - gram/s (g)" + "\n" +
+                    "2. - Kilogram/s (kg)" + "\n" +
+                    "3. - Milliliter/s (ml)" + "\n" +
+                    "4. - Liter/s (L)" + "\n" +
+                    "5. - Teaspoon/s" + "\n" +
+                    "6. - Tablespoon/s" + "\n" +
+                    "7. - Cup/s" + "\n" +
+                    "8. - Custom Value");
                     string UoM = Console.ReadLine();
-                    if(UoM.Length == 0) {
-                        Console.WriteLine("Please add a valid Unit of Measurment");
-                        SaveIngredients(IngArray);
+
+                    switch (UoM)
+                    {
+                        case "1":
+                            UoM = "gram/s";
+                            break;
+
+                        case "2":
+                            UoM = "Kilogram/s";
+                            break;
+
+                        case "3":
+                            UoM = "Milliliter/s";
+                            break;
+
+                        case "4":
+                            UoM = "Liter/s";
+                            break;
+
+                        case "5":
+                            UoM = "Teaspoon/s";
+                            break;
+
+                        case "6":
+                            UoM = "Tablespoon/s";
+                            break;
+
+                        case "7":
+                            UoM = "Cup/s";
+                            break;
+
+                        case "8":
+                            Console.WriteLine("Please enter custom unit of measurment:");
+                            UoM = Console.ReadLine();
+                            break;
                     }
 
                     //stores user input into the array
@@ -112,7 +160,7 @@ namespace IngProgram
             {
                 for (int i = 0; i < stepCount.Length; i++)
                 {
-                    Console.WriteLine("Please enter step " + x++ + " for this recipe");
+                    Console.WriteLine("Please enter step " + x++ + " for this recipe:");
                     var stepWritten = Console.ReadLine();
                     stepCount[i] = new UserSteps(stepWritten);
                 }
@@ -127,36 +175,44 @@ namespace IngProgram
         //DisplayRecipe method takes values from both arrays and displays the recipe and steps for recipe in a neat manner
         public static void DisplayRecipe(Ingredients[] IngArray, UserSteps[] stepCount)
         {
-            Console.ForegroundColor 
-            = ConsoleColor.Blue; 
-            try {
-            Console.WriteLine("" + "\n" +
-            "******************************" + "\n" +
-            "--------------------" + "\n" +
-            "Here is your recipe:" + "\n" +
-            "--------------------" + "\n");
-            foreach (var ingredient in IngArray)
+            Console.ForegroundColor
+            = ConsoleColor.Blue;
+            try
             {
-                Console.WriteLine($"{ingredient.IngQuantity} {ingredient.UoM} - {ingredient.IngName}"); ;
-            }
-            Console.WriteLine("" + "\n" +
-            "******************************" + "\n" +
-            "--------------------------" + "\n" +
-            "Here are the recipe steps:" + "\n" +
-            "--------------------------" + "\n");
+                Console.WriteLine("" + "\n" +
+                "******************************" + "\n" +
+                "--------------------" + "\n" +
+                "Here is your recipe:" + "\n" +
+                "--------------------" + "\n");
+                foreach (var ingredient in IngArray)
+                {
+                    Console.WriteLine($"{ingredient.IngQuantity} {ingredient.UoM} - {ingredient.IngName}"); ;
+                }
+                Console.WriteLine("" + "\n" +
+                "******************************" + "\n" +
+                "--------------------------" + "\n" +
+                "Here are the recipe steps:" + "\n" +
+                "--------------------------" + "\n");
+                for (int i = 1; i < stepCount.Count(); i++)
+                {
+                    foreach (var step in stepCount)
+                    {
+                        Console.WriteLine("Step:" + i++ + " -" + "\n" + $"{step.userStepCount}");
 
-            foreach (var step in stepCount)
-            {
-                int x = 1;
-                Console.WriteLine("Step: " + x++ + $" {step.userStepCount}");
+                    }
+                    Console.WriteLine("******************************" + "\n");
+                    
+                }
+                Console.ForegroundColor
+                    = ConsoleColor.White;
             }
-            Console.WriteLine("******************************" + "\n");
-            Console.ForegroundColor 
-            = ConsoleColor.Black; 
-            } catch {
+            catch
+            {
                 Console.WriteLine("Something went wrong with the recipe display, please try again");
                 MainRepeat();
             }
+            Console.ForegroundColor
+                    = ConsoleColor.White;
         }
 
         //FactorIngredients() allows user to scale the factor of IngQuantity or follows necessary actions (exit or proceed to steps)
@@ -168,6 +224,7 @@ namespace IngProgram
             Console.WriteLine("Would you like to scale the factor of your ingredients? Type Yes or Anything to skip");
             var factorCheck = Console.ReadLine();
             factorCheck = factorCheck.ToLower();
+
 
             //while statment ensuring user loops if incorrect values are used
             while (factorScaleCheck == false)
@@ -182,37 +239,185 @@ namespace IngProgram
                     if (factorValue == "A")
                     {
                         factorScale = 0.5;
+
+                        Console.ForegroundColor
+                                = ConsoleColor.Green;
+
                         Console.WriteLine("Here is the updated recipe: ");
                         //foreach statement looping through IngArray to apply factors and display updated recipe
                         foreach (var ingredient in IngArray)
                         {
+
                             double updatedQuantity = ingredient.IngQuantity * factorScale;
+
+                            if (updatedQuantity >= 1000 && ingredient.UoM == "gram/s")
+                            {
+                                updatedQuantity = updatedQuantity / 1000;
+                                ingredient.UoM = "Kilogram/s";
+                            }
+
+                            if (updatedQuantity <= 1 && ingredient.UoM == "Kilogram/s")
+                            {
+                                updatedQuantity = updatedQuantity * 1000;
+                                ingredient.UoM = "gram/s";
+                            }
+
+                            if (updatedQuantity >= 1000 && ingredient.UoM == "Milliliter/s")
+                            {
+                                updatedQuantity = updatedQuantity / 1000;
+                                ingredient.UoM = "Liter/s";
+                            }
+
+                            if (updatedQuantity <= 1 && ingredient.UoM == "Liter/s")
+                            {
+                                updatedQuantity = updatedQuantity * 1000;
+                                ingredient.UoM = "Milliliter/s";
+                            }
+
+                            if (updatedQuantity >= 3 && ingredient.UoM == "Teaspoon/s")
+                            {
+                                ingredient.UoM = "Tablespoon/s";
+                            }
+
+                            if (updatedQuantity <= 1 && ingredient.UoM == "Tablespoon/s")
+                            {
+                                updatedQuantity = updatedQuantity * 3;
+                                ingredient.UoM = "Teaspoon/s";
+                            }
+                            if (updatedQuantity <= 1.1 && ingredient.UoM == "Cup/s")
+                            {
+                                updatedQuantity = updatedQuantity * 16;
+                                ingredient.UoM = "Tablespoon/s";
+                            }
+                            
+                            Console.WriteLine("");
                             Console.WriteLine($"{updatedQuantity} {ingredient.UoM} - {ingredient.IngName}");
+                            Console.WriteLine("");
                         }
+                        Console.ForegroundColor
+                                = ConsoleColor.White;
+
                         factorScaleCheck = true;
                     }
                     else if (factorValue == "B")
                     {
                         factorScale = 2;
+                        Console.ForegroundColor
+                                = ConsoleColor.Green;
                         Console.WriteLine("Here is the updated recipe: ");
                         //foreach statement looping through IngArray to apply factors and display updated recipe
                         foreach (var ingredient in IngArray)
                         {
                             double updatedQuantity = ingredient.IngQuantity * factorScale;
+                            
+                            if (updatedQuantity >= 1000 && ingredient.UoM == "gram/s")
+                            {
+                                updatedQuantity = updatedQuantity / 1000;
+                                ingredient.UoM = "Kilogram/s";
+                            }
+
+                            if (updatedQuantity <= 1 && ingredient.UoM == "Kilogram/s")
+                            {
+                                updatedQuantity = updatedQuantity * 1000;
+                                ingredient.UoM = "gram/s";
+                            }
+
+                            if (updatedQuantity >= 1000 && ingredient.UoM == "Milliliter/s")
+                            {
+                                updatedQuantity = updatedQuantity / 1000;
+                                ingredient.UoM = "Liter/s";
+                            }
+
+                            if (updatedQuantity <= 1 && ingredient.UoM == "Liter/s")
+                            {
+                                updatedQuantity = updatedQuantity * 1000;
+                                ingredient.UoM = "Milliliter/s";
+                            }
+
+                            if (updatedQuantity >= 3 && ingredient.UoM == "Teaspoon/s")
+                            {
+                                ingredient.UoM = "Tablespoon/s";
+                            }
+
+                            if (updatedQuantity <= 1 && ingredient.UoM == "Tablespoon/s")
+                            {
+                                updatedQuantity = updatedQuantity * 3;
+                                ingredient.UoM = "Teaspoon/s";
+                            }
+                            if (updatedQuantity <= 1.1 && ingredient.UoM == "Cup/s")
+                            {
+                                updatedQuantity = updatedQuantity * 16;
+                                ingredient.UoM = "Tablespoon/s";
+                            }
+
+                            
+                            Console.WriteLine("");
                             Console.WriteLine($"{updatedQuantity} {ingredient.UoM} - {ingredient.IngName}");
+                            Console.WriteLine("");
+
                         }
+                        Console.ForegroundColor
+                                = ConsoleColor.White;
+
                         factorScaleCheck = true;
                     }
                     else if (factorValue == "C")
                     {
                         factorScale = 3;
+                        Console.ForegroundColor
+                                = ConsoleColor.Green;
                         Console.WriteLine("Here is the updated recipe: ");
                         //foreach statement looping through IngArray to apply factors and display updated recipe
                         foreach (var ingredient in IngArray)
                         {
                             double updatedQuantity = ingredient.IngQuantity * factorScale;
+                            
+                            if (updatedQuantity >= 1000 && ingredient.UoM == "gram/s")
+                            {
+                                updatedQuantity = updatedQuantity / 1000;
+                                ingredient.UoM = "Kilogram/s";
+                            }
+
+                            if (updatedQuantity <= 1 && ingredient.UoM == "Kilogram/s")
+                            {
+                                updatedQuantity = updatedQuantity * 1000;
+                                ingredient.UoM = "gram/s";
+                            }
+
+                            if (updatedQuantity >= 1000 && ingredient.UoM == "Milliliter/s")
+                            {
+                                updatedQuantity = updatedQuantity / 1000;
+                                ingredient.UoM = "Liter/s";
+                            }
+
+                            if (updatedQuantity <= 1 && ingredient.UoM == "Liter/s")
+                            {
+                                updatedQuantity = updatedQuantity * 1000;
+                                ingredient.UoM = "Milliliter/s";
+                            }
+
+                            if (updatedQuantity >= 3 && ingredient.UoM == "Teaspoon/s")
+                            {
+                                ingredient.UoM = "Tablespoon/s";
+                            }
+
+                            if (updatedQuantity <= 1 && ingredient.UoM == "Tablespoon/s")
+                            {
+                                updatedQuantity = updatedQuantity * 3;
+                                ingredient.UoM = "Teaspoon/s";
+                            }
+                            if (updatedQuantity <= 1.1 && ingredient.UoM == "Cup/s")
+                            {
+                                updatedQuantity = updatedQuantity * 16;
+                                ingredient.UoM = "Tablespoon/s";
+                            }
+
+                            Console.WriteLine("");
                             Console.WriteLine($"{updatedQuantity} {ingredient.UoM} - {ingredient.IngName}");
+                            Console.WriteLine("");
                         }
+                        Console.ForegroundColor
+                                = ConsoleColor.White;
 
                         factorScaleCheck = true;
                     }
@@ -273,6 +478,7 @@ namespace IngProgram
                 Environment.Exit(0);
             }
         }
+
     }
 }
 
