@@ -29,11 +29,20 @@ namespace IngProgram
         }
     }
 
-
     class IngredientProgram
     {
         public static void Main(string[] args)
         {
+            try {
+                MainRepeat();
+            } catch {
+                
+                MainRepeat();
+            }
+        }
+
+        public static void MainRepeat() {
+            try{
             Console.WriteLine("Please enter number of ingredients");
             int ingCounter = Int32.Parse(Console.ReadLine());
 
@@ -49,30 +58,49 @@ namespace IngProgram
 
             DisplayRecipe(IngArray, stepCount);
 
-
             FactorIngredients(IngArray);
 
             ClearData(IngArray, stepCount);
+            } catch {
+                Console.WriteLine("The system encountered an error, try again");
+                MainRepeat();
+            }
         }
 
         //SaveIngredients() allows for user input and saves the Ingredients info to the array
         public static void SaveIngredients(Ingredients[] IngArray)
         {
             int x = 1;
-            for (int i = 0; i < IngArray.Length; i++)
+            try
             {
-                Console.WriteLine("Please enter name of ingredient: " + x++);
-                string IngName = Console.ReadLine();
+                for (int i = 0; i < IngArray.Length; i++)
+                {
+                    Console.WriteLine("Please enter name of ingredient: " + x++);
+                    string IngName = Console.ReadLine();
+                    if(IngName.Length == 0) {
+                        Console.WriteLine("Please add a valid word");
+                        SaveIngredients(IngArray);
+                    }
 
-                //Turned to a var as input will be mixed between string and int
-                Console.WriteLine("Please enter quantity of: " + IngName);
-                int IngQuantity = Int32.Parse(Console.ReadLine());
+                    //Turned to a var as input will be mixed between string and int
+                    Console.WriteLine("Please enter quantity of: " + IngName);
+                    int IngQuantity = Int32.Parse(Console.ReadLine());
 
-                Console.WriteLine("Please enter Unit of Measurment for: " + IngName);
-                string UoM = Console.ReadLine();
+                    Console.WriteLine("Please enter Unit of Measurment for: " + IngName);
+                    string UoM = Console.ReadLine();
+                    if(UoM.Length == 0) {
+                        Console.WriteLine("Please add a valid Unit of Measurment");
+                        SaveIngredients(IngArray);
+                    }
 
-                //stores user input into the array
-                IngArray[i] = new Ingredients(IngName, IngQuantity, UoM);
+                    //stores user input into the array
+                    IngArray[i] = new Ingredients(IngName, IngQuantity, UoM);
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Oh no! That should not happen, please try again");
+                SaveIngredients(IngArray);
             }
         }
 
@@ -80,17 +108,28 @@ namespace IngProgram
         public static void UserSteps(UserSteps[] stepCount)
         {
             int x = 1;
-            for (int i = 0; i < stepCount.Length; i++)
+            try
             {
-                Console.WriteLine("Please enter step " + x++ + " for this recipe");
-                var stepWritten = Console.ReadLine();
-                stepCount[i] = new UserSteps(stepWritten);
+                for (int i = 0; i < stepCount.Length; i++)
+                {
+                    Console.WriteLine("Please enter step " + x++ + " for this recipe");
+                    var stepWritten = Console.ReadLine();
+                    stepCount[i] = new UserSteps(stepWritten);
+                }
+            }
+            catch
+            {
+                Console.WriteLine("That doesn't look right :( lets give it another go");
+                UserSteps(stepCount);
             }
         }
 
         //DisplayRecipe method takes values from both arrays and displays the recipe and steps for recipe in a neat manner
         public static void DisplayRecipe(Ingredients[] IngArray, UserSteps[] stepCount)
         {
+            Console.ForegroundColor 
+            = ConsoleColor.Blue; 
+            try {
             Console.WriteLine("" + "\n" +
             "******************************" + "\n" +
             "--------------------" + "\n" +
@@ -102,14 +141,22 @@ namespace IngProgram
             }
             Console.WriteLine("" + "\n" +
             "******************************" + "\n" +
-            "---------------------------" + "\n" +
+            "--------------------------" + "\n" +
             "Here are the recipe steps:" + "\n" +
-            "---------------------------" + "\n");
+            "--------------------------" + "\n");
+
             foreach (var step in stepCount)
             {
-                Console.WriteLine($"{step.userStepCount}");
+                int x = 1;
+                Console.WriteLine("Step: " + x++ + $" {step.userStepCount}");
             }
             Console.WriteLine("******************************" + "\n");
+            Console.ForegroundColor 
+            = ConsoleColor.Black; 
+            } catch {
+                Console.WriteLine("Something went wrong with the recipe display, please try again");
+                MainRepeat();
+            }
         }
 
         //FactorIngredients() allows user to scale the factor of IngQuantity or follows necessary actions (exit or proceed to steps)
@@ -118,7 +165,7 @@ namespace IngProgram
             double factorScale;
             bool factorScaleCheck = false;
 
-            Console.WriteLine("Would you like to scale the factor of your ingredients? Type Yes or No");
+            Console.WriteLine("Would you like to scale the factor of your ingredients? Type Yes or Anything to skip");
             var factorCheck = Console.ReadLine();
             factorCheck = factorCheck.ToLower();
 
@@ -217,13 +264,8 @@ namespace IngProgram
             //Clears arrays
             if (newRecipe == "NEW")
             {
-                Console.WriteLine("Please enter number of ingredients");
-                int ingCounter = Int32.Parse(Console.ReadLine());
+                MainRepeat();
 
-                IngArray = new Ingredients[ingCounter];
-                userSteps = new UserSteps[0];
-
-                SaveIngredients(IngArray);
                 //If user chooses not to start a new recipe, application will close    
             }
             else
