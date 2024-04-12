@@ -570,7 +570,7 @@ namespace IngProgram
             = ConsoleColor.Blue;
             try
             {
-                //Recipe displayed
+                //Original Recipe displayed
                 Console.WriteLine("" + "\n" +
                 "******************************" + "\n" +
                 "--------------------" + "\n" +
@@ -586,7 +586,7 @@ namespace IngProgram
                 //Error handling
                 Console.ForegroundColor
                     = ConsoleColor.White;
-                Console.WriteLine("Something went wrong with the recipe display, please try again");
+                Console.WriteLine("Something went wrong with the recipe reset, please try again");
                 //Restarts program
                 ProgramStart();
             }
@@ -612,6 +612,7 @@ namespace IngProgram
             else
             {
                 Console.WriteLine("Application closed...");
+                //Closes Application
                 Environment.Exit(0);
             }
         }
