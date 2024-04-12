@@ -44,7 +44,7 @@ namespace IngProgram
         }
 
 
-        //MainRepeat() Method declares needed arrays and call necessary methods, surrounded in a try catch for error handling.
+        //ProgranStart() Method declares needed arrays and call necessary methods, surrounded in a try catch for error handling.
         public static void ProgramStart()
         {
             try
@@ -63,6 +63,7 @@ namespace IngProgram
                 UserSteps[] stepCount = new UserSteps[userStepCount];
                 UserSteps(stepCount);
 
+                //Calling of methods
                 DisplayRecipe(IngArray, stepCount);
 
                 FactorIngredients(IngArray, stepCount);
@@ -89,14 +90,17 @@ namespace IngProgram
                     string IngName = Console.ReadLine();
                     if (IngName.Length == 0)
                     {
+
+                        //Error Handling
                         Console.WriteLine("Please add a valid word:");
                         SaveIngredients(IngArray);
                     }
 
-                    //Turned to a var as input will be mixed between string and int
+                    //Turned to a double to allow for usage of commas if values are les than 1
                     Console.WriteLine("Please enter quantity of: " + IngName);
                     double IngQuantity = Convert.ToDouble(Console.ReadLine());
 
+                    //Allows user to select from custom units of measurment or to enter own
                     Console.WriteLine("Please select a Unit of Measurment for: " + IngName + "\n" +
                     "1. - Gram/s (g)" + "\n" +
                     "2. - Kilogram/s (kg)" + "\n" +
@@ -175,6 +179,7 @@ namespace IngProgram
             {
                 for (int i = 0; i < stepCount.Length; i++)
                 {
+                    //Asks user for next step while displaying step number
                     Console.WriteLine("Please enter step " + x++ + " for this recipe:");
                     var stepWritten = Console.ReadLine();
                     stepCount[i] = new UserSteps(stepWritten);
@@ -197,6 +202,7 @@ namespace IngProgram
             = ConsoleColor.Blue;
             try
             {
+                //Recipe displayed
                 Console.WriteLine("" + "\n" +
                 "******************************" + "\n" +
                 "--------------------" + "\n" +
@@ -261,6 +267,7 @@ namespace IngProgram
                     {
                         factorScale = 0.5;
 
+                        //Changes wording colour
                         Console.ForegroundColor
                                 = ConsoleColor.Green;
 
@@ -336,6 +343,8 @@ namespace IngProgram
                             Console.WriteLine($"{updatedQuantity} {ingredient.UoM} - {ingredient.IngName}");
                             Console.WriteLine("");
                         }
+
+                        //To change colour back to white
                         Console.ForegroundColor
                                 = ConsoleColor.White;
 
@@ -535,15 +544,15 @@ namespace IngProgram
                 if (resetCheck == "R")
                 {
                     Console.WriteLine("Here is the recipe with the reset values: ");
-                    //Displays original values given by user.
-                      DisplayRecipe(IngArray, stepCount);   
+                    //Displays original values given by user. Effectively resetting values
+                    DisplayRecipe(IngArray, stepCount);
                     Console.ForegroundColor
                             = ConsoleColor.White;
                 }
             }
         }
 
-        
+
 
         //ClearData clears data from IngArray and UserSteps, allowing for a clean start.
         public static void ClearData(Ingredients[] IngArray, UserSteps[] userSteps)
@@ -557,7 +566,7 @@ namespace IngProgram
             {
                 ProgramStart();
 
-                //If user chooses not to start a new recipe, application will close    
+            //If user chooses not to start a new recipe, application will close    
             }
             else
             {
