@@ -49,7 +49,7 @@ namespace IngProgram
         {
             try
             {
-                Console.WriteLine("Please enter number of ingredients");
+                Console.WriteLine("Please enter number of ingredients in recipe:");
                 int ingCounter = Int32.Parse(Console.ReadLine());
 
                 //Decleration of ingredients array
@@ -109,42 +109,50 @@ namespace IngProgram
                     string UoM = Console.ReadLine();
 
                     //Switch case to convert user selection
+
                     switch (UoM)
                     {
                         case "1":
                             UoM = "gram/s";
+                            Console.WriteLine("Selected Option: " + UoM);
                             break;
 
                         case "2":
                             UoM = "Kilogram/s";
+                            Console.WriteLine("Selected Option: " + UoM);
                             break;
 
                         case "3":
                             UoM = "Milliliter/s";
+                            Console.WriteLine("Selected Option: " + UoM);
                             break;
 
                         case "4":
                             UoM = "Liter/s";
+                            Console.WriteLine("Selected Option: " + UoM);
                             break;
 
                         case "5":
                             UoM = "Teaspoon/s";
+                            Console.WriteLine("Selected Option: " + UoM);
                             break;
 
                         case "6":
                             UoM = "Tablespoon/s";
+                            Console.WriteLine("Selected Option: " + UoM);
                             break;
 
                         case "7":
                             UoM = "Cup/s";
+                            Console.WriteLine("Selected Option: " + UoM);
                             break;
 
                         case "8":
                             Console.WriteLine("Please enter custom unit of measurment:");
                             UoM = Console.ReadLine();
+                            Console.WriteLine("Selected Option: " + UoM);
                             break;
                     }
-
                     //stores user input into the array
                     IngArray[i] = new Ingredients(IngName, IngQuantity, UoM);
                 }
@@ -152,7 +160,7 @@ namespace IngProgram
             catch
             {
                 //Error handling
-                Console.WriteLine("Oh no! That should not happen, please try again");
+                Console.WriteLine("Oh no! That wasn't correct, please try again");
                 //Recall method
                 SaveIngredients(IngArray);
             }
@@ -459,9 +467,9 @@ namespace IngProgram
 
                 if (resetCheck == "R")
                 {
-                    Console.ForegroundColor 
+                    Console.ForegroundColor
                             = ConsoleColor.Magenta;
-                    
+
                     Console.WriteLine("Here is the recipe with the reset values: ");
                     //resets quantities and displays the now new values
                     foreach (var value in IngArray)
