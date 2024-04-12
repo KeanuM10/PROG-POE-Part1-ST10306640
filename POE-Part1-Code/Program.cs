@@ -65,7 +65,7 @@ namespace IngProgram
 
                 DisplayRecipe(IngArray, stepCount);
 
-                FactorIngredients(IngArray);
+                FactorIngredients(IngArray, stepCount);
 
                 ClearData(IngArray, stepCount);
             }
@@ -237,7 +237,7 @@ namespace IngProgram
 
         //FactorIngredients() allows user to scale the factor of IngQuantity or follows necessary actions (exit or proceed to steps).
         //UoM is scaled accordingly here, measurements are converted to more appropriate values.
-        public static void FactorIngredients(Ingredients[] IngArray)
+        public static void FactorIngredients(Ingredients[] IngArray, UserSteps[] stepCount)
         {
             double factorScale;
             bool factorScaleCheck = false;
@@ -295,21 +295,41 @@ namespace IngProgram
                                 ingredient.UoM = "Milliliter/s";
                             }
 
-                            if (ingredient.UoM == "Teaspoon/s" && updatedQuantity >= 3)
+                            if (ingredient.UoM == "Teaspoon/s")
                             {
-                                updatedQuantity = updatedQuantity / 3;
-                                ingredient.UoM = "Tablespoon/s";
+                                if (updatedQuantity >= 3)
+                                {
+                                    updatedQuantity = updatedQuantity / 3;
+                                    ingredient.UoM = "Tablespoon/s";
+                                }
+                                else if (updatedQuantity < 1)
+                                {
+                                    updatedQuantity = updatedQuantity * 3;
+                                    ingredient.UoM = "Tablespoon/s";
+                                }
                             }
 
-                            if (ingredient.UoM == "Tablespoon/s" && updatedQuantity < 1)
+                            if (ingredient.UoM == "Tablespoon/s")
                             {
-                                updatedQuantity = updatedQuantity * 3;
-                                ingredient.UoM = "Teaspoon/s";
+                                if (updatedQuantity >= 16)
+                                {
+                                    updatedQuantity = updatedQuantity / 16;
+                                    ingredient.UoM = "Cup/s";
+                                }
+                                else if (updatedQuantity < 1)
+                                {
+                                    updatedQuantity = updatedQuantity * 3;
+                                    ingredient.UoM = "Teaspoon/s";
+                                }
                             }
-                            if (updatedQuantity < 1 && ingredient.UoM == "Cup/s")
+
+                            if (ingredient.UoM == "Cup/s")
                             {
-                                updatedQuantity = updatedQuantity * 16;
-                                ingredient.UoM = "Tablespoon/s";
+                                if (updatedQuantity < 1)
+                                {
+                                    updatedQuantity = updatedQuantity * 16;
+                                    ingredient.UoM = "Tablespoon/s";
+                                }
                             }
 
                             Console.WriteLine("");
@@ -356,21 +376,41 @@ namespace IngProgram
                                 ingredient.UoM = "Milliliter/s";
                             }
 
-                            if (ingredient.UoM == "Teaspoon/s" && updatedQuantity >= 3)
+                            if (ingredient.UoM == "Teaspoon/s")
                             {
-                                updatedQuantity = updatedQuantity / 3;
-                                ingredient.UoM = "Tablespoon/s";
+                                if (updatedQuantity >= 3)
+                                {
+                                    updatedQuantity = updatedQuantity / 3;
+                                    ingredient.UoM = "Tablespoon/s";
+                                }
+                                else if (updatedQuantity < 1)
+                                {
+                                    updatedQuantity = updatedQuantity * 3;
+                                    ingredient.UoM = "Tablespoon/s";
+                                }
                             }
 
-                            if (ingredient.UoM == "Tablespoon/s" && updatedQuantity < 1)
+                            if (ingredient.UoM == "Tablespoon/s")
                             {
-                                updatedQuantity = updatedQuantity * 3;
-                                ingredient.UoM = "Teaspoon/s";
+                                if (updatedQuantity >= 16)
+                                {
+                                    updatedQuantity = updatedQuantity / 16;
+                                    ingredient.UoM = "Cup/s";
+                                }
+                                else if (updatedQuantity < 1)
+                                {
+                                    updatedQuantity = updatedQuantity * 3;
+                                    ingredient.UoM = "Teaspoon/s";
+                                }
                             }
-                            if (updatedQuantity < 1 && ingredient.UoM == "Cup/s")
+
+                            if (ingredient.UoM == "Cup/s")
                             {
-                                updatedQuantity = updatedQuantity * 16;
-                                ingredient.UoM = "Tablespoon/s";
+                                if (updatedQuantity < 1)
+                                {
+                                    updatedQuantity = updatedQuantity * 16;
+                                    ingredient.UoM = "Tablespoon/s";
+                                }
                             }
 
 
@@ -407,7 +447,7 @@ namespace IngProgram
                                 ingredient.UoM = "Gram/s";
                             }
 
-                            if (updatedQuantity >= 999 && ingredient.UoM == "Milliliter/s")
+                            if (updatedQuantity >= 1000 && ingredient.UoM == "Milliliter/s")
                             {
                                 updatedQuantity = updatedQuantity / 1000;
                                 ingredient.UoM = "Liter/s";
@@ -419,21 +459,41 @@ namespace IngProgram
                                 ingredient.UoM = "Milliliter/s";
                             }
 
-                            if (ingredient.UoM == "Teaspoon/s" && updatedQuantity >= 3)
+                            if (ingredient.UoM == "Teaspoon/s")
                             {
-                                updatedQuantity = updatedQuantity / 3;
-                                ingredient.UoM = "Tablespoon/s";
+                                if (updatedQuantity >= 3)
+                                {
+                                    updatedQuantity = updatedQuantity / 3;
+                                    ingredient.UoM = "Tablespoon/s";
+                                }
+                                else if (updatedQuantity < 1)
+                                {
+                                    updatedQuantity = updatedQuantity * 3;
+                                    ingredient.UoM = "Tablespoon/s";
+                                }
                             }
 
-                            if (ingredient.UoM == "Tablespoon/s" && updatedQuantity < 1)
+                            if (ingredient.UoM == "Tablespoon/s")
                             {
-                                updatedQuantity = updatedQuantity * 3;
-                                ingredient.UoM = "Teaspoon/s";
+                                if (updatedQuantity >= 16)
+                                {
+                                    updatedQuantity = updatedQuantity / 16;
+                                    ingredient.UoM = "Cup/s";
+                                }
+                                else if (updatedQuantity < 1)
+                                {
+                                    updatedQuantity = updatedQuantity * 3;
+                                    ingredient.UoM = "Teaspoon/s";
+                                }
                             }
-                            if (updatedQuantity < 1 && ingredient.UoM == "Cup/s")
+
+                            if (ingredient.UoM == "Cup/s")
                             {
-                                updatedQuantity = updatedQuantity * 16;
-                                ingredient.UoM = "Tablespoon/s";
+                                if (updatedQuantity < 1)
+                                {
+                                    updatedQuantity = updatedQuantity * 16;
+                                    ingredient.UoM = "Tablespoon/s";
+                                }
                             }
 
                             Console.WriteLine("");
@@ -471,58 +531,19 @@ namespace IngProgram
 
                 Console.ForegroundColor
                             = ConsoleColor.Magenta;
+
                 if (resetCheck == "R")
                 {
                     Console.WriteLine("Here is the recipe with the reset values: ");
-                    //resets quantities and displays the now new values
-                    foreach (var value in IngArray)
-                    {
-                        double originalQuan = value.IngQuantity;
-
-                        if (value.UoM == "Gram/s")
-                        {
-                            if (value.IngQuantity <= 1000)
-                            {
-                                value.UoM = "Kilogram/s";
-                            }
-                        }
-                        else if (value.UoM == "Kilogram/s")
-                        {
-                            if (value.IngQuantity >= 1)
-                            {
-                                value.UoM = "Gram/s";
-                            }
-                        }
-
-                        if (value.UoM == "Milliliter/s" && value.IngQuantity <= 1000)
-                        {
-                            value.UoM = "Liter/s";
-                        }
-                        else if (value.UoM == "Liter/s" && value.IngQuantity >= 1)
-                        {
-                            value.UoM = "Milliliter/s";
-                        }
-
-                        if(value.UoM == "Teaspoon/s" && value.IngQuantity >= 3) {
-                            value.IngQuantity = value.IngQuantity / 3;
-                            value.UoM = "Tablespoon/s";
-                        }
-
-                        if(value.UoM == "Tablespoon/s" && value.IngQuantity >= 16) {
-                            value.IngQuantity = value.IngQuantity / 16;
-                            value.UoM = "Cup/s";
-                        }
-
-                        Console.WriteLine("");
-                        Console.WriteLine($"{originalQuan} {value.UoM} - {value.IngName}");
-                        Console.WriteLine("");
-
-                    }
+                    //Displays original values given by user.
+                      DisplayRecipe(IngArray, stepCount);   
                     Console.ForegroundColor
                             = ConsoleColor.White;
                 }
             }
         }
+
+        
 
         //ClearData clears data from IngArray and UserSteps, allowing for a clean start.
         public static void ClearData(Ingredients[] IngArray, UserSteps[] userSteps)
