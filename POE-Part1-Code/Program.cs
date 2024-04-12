@@ -112,57 +112,66 @@ namespace IngProgram
                     "8. - Custom Value");
                     string UoM = Console.ReadLine();
 
-                    //Switch case to convert user selection
-
-                    switch (UoM)
-                    {
-                        case "1":
-                            UoM = "Gram/s";
-                            Console.WriteLine("Selected Option: " + UoM);
-                            break;
-
-                        case "2":
-                            UoM = "Kilogram/s";
-                            Console.WriteLine("Selected Option: " + UoM);
-                            break;
-
-                        case "3":
-                            UoM = "Milliliter/s";
-                            Console.WriteLine("Selected Option: " + UoM);
-                            break;
-
-                        case "4":
-                            UoM = "Liter/s";
-                            Console.WriteLine("Selected Option: " + UoM);
-                            break;
-
-                        case "5":
-                            UoM = "Teaspoon/s";
-                            Console.WriteLine("Selected Option: " + UoM);
-                            break;
-
-                        case "6":
-                            UoM = "Tablespoon/s";
-                            Console.WriteLine("Selected Option: " + UoM);
-                            break;
-
-                        case "7":
-                            UoM = "Cup/s";
-                            Console.WriteLine("Selected Option: " + UoM);
-                            break;
-
-                        case "8":
-                            Console.WriteLine("Please enter custom unit of measurment:");
-                            UoM = Console.ReadLine();
-                            Console.WriteLine("Selected Option: " + UoM);
-                            break;
-                    }
-
                     //Prompts user to enter a valid option
-                    if(UoM != "1" ||UoM !="2" ||UoM !="3" ||UoM !="4" ||UoM !="5" ||UoM !="6" ||UoM !="7" ||UoM !="8") 
+                    bool UomCheck = false;
+                    while (UomCheck == false)
                     {
-                        Console.WriteLine("Please select a valid option");
+                        if(!(UoM.Length == 1 && (UoM[0] >= '1' || UoM[0] <= '8'))) 
+                        {
+                        Console.WriteLine("Please select a valid option (1-8).");
+                        UoM = Console.ReadLine();
+                        }
+                         else if (UoM.Length == 1 && (UoM[0] >= '1' || UoM[0] <= '8'))
+                        {
+                            //Switch case to convert user selection
+                            switch (UoM)
+                            {
+                                case "1":
+                                    UoM = "Gram/s";
+                                    Console.WriteLine("Selected Option: " + UoM);
+                                    break;
+
+                                case "2":
+                                    UoM = "Kilogram/s";
+                                    Console.WriteLine("Selected Option: " + UoM);
+                                    break;
+
+                                case "3":
+                                    UoM = "Milliliter/s";
+                                    Console.WriteLine("Selected Option: " + UoM);
+                                    break;
+
+                                case "4":
+                                    UoM = "Liter/s";
+                                    Console.WriteLine("Selected Option: " + UoM);
+                                    break;
+
+                                case "5":
+                                    UoM = "Teaspoon/s";
+                                    Console.WriteLine("Selected Option: " + UoM);
+                                    break;
+
+                                case "6":
+                                    UoM = "Tablespoon/s";
+                                    Console.WriteLine("Selected Option: " + UoM);
+                                    break;
+
+                                case "7":
+                                    UoM = "Cup/s";
+                                    Console.WriteLine("Selected Option: " + UoM);
+                                    break;
+
+                                case "8":
+                                    Console.WriteLine("Please enter custom unit of measurment:");
+                                    UoM = Console.ReadLine();
+                                    Console.WriteLine("Selected Option: " + UoM);
+                                    break;
+                            }
+                            UomCheck = true;
+                        }
+
                     }
+
 
                     //stores user input into the array
                     IngArray[i] = new Ingredients(IngName, IngQuantity, UoM);
@@ -277,7 +286,7 @@ namespace IngProgram
                         Console.ForegroundColor
                                 = ConsoleColor.Green;
 
-                        Console.WriteLine("Here is the updated recipe: ");
+                        Console.WriteLine("Here is the updated recipe: " + "\n");
                         //foreach statement looping through IngArray to apply factors and display updated recipe
                         foreach (var ingredient in IngArray)
                         {
@@ -345,9 +354,9 @@ namespace IngProgram
                                 }
                             }
 
-                            Console.WriteLine("");
+                            Console.WriteLine("***************");
                             Console.WriteLine($"{updatedQuantity} {ingredient.UoM} - {ingredient.IngName}");
-                            Console.WriteLine("");
+                            Console.WriteLine("---------------");
                         }
 
                         //To change colour back to white
@@ -361,7 +370,7 @@ namespace IngProgram
                         factorScale = 2;
                         Console.ForegroundColor
                                 = ConsoleColor.Green;
-                        Console.WriteLine("Here is the updated recipe: ");
+                        Console.WriteLine("Here is the updated recipe: " + "\n");
                         //foreach statement looping through IngArray to apply factors and display updated recipe
                         foreach (var ingredient in IngArray)
                         {
@@ -427,12 +436,9 @@ namespace IngProgram
                                     ingredient.UoM = "Tablespoon/s";
                                 }
                             }
-
-
-                            Console.WriteLine("");
+                            Console.WriteLine("***************");
                             Console.WriteLine($"{updatedQuantity} {ingredient.UoM} - {ingredient.IngName}");
-                            Console.WriteLine("");
-
+                            Console.WriteLine("---------------");
                         }
                         Console.ForegroundColor
                                 = ConsoleColor.White;
@@ -444,7 +450,7 @@ namespace IngProgram
                         factorScale = 3;
                         Console.ForegroundColor
                                 = ConsoleColor.Green;
-                        Console.WriteLine("Here is the updated recipe: ");
+                        Console.WriteLine("Here is the updated recipe: " + "\n");
                         //foreach statement looping through IngArray to apply factors and display updated recipe
                         foreach (var ingredient in IngArray)
                         {
@@ -510,10 +516,9 @@ namespace IngProgram
                                     ingredient.UoM = "Tablespoon/s";
                                 }
                             }
-
-                            Console.WriteLine("");
+                            Console.WriteLine("***************");
                             Console.WriteLine($"{updatedQuantity} {ingredient.UoM} - {ingredient.IngName}");
-                            Console.WriteLine("");
+                            Console.WriteLine("---------------");
                         }
                         Console.ForegroundColor
                                 = ConsoleColor.White;
@@ -551,14 +556,44 @@ namespace IngProgram
                 {
                     Console.WriteLine("Here is the recipe with the reset values: ");
                     //Displays original values given by user. Effectively resetting values
-                    DisplayRecipe(IngArray, stepCount);
+                    OriginalRecipe(IngArray, stepCount);
                     Console.ForegroundColor
                             = ConsoleColor.White;
                 }
             }
         }
-
-
+        //OriginalRecipe() displays original values, effectively reseting given values.
+        public static void OriginalRecipe(Ingredients[] IngArray, UserSteps[] stepCount)
+        {
+            //Set text colour to blue
+            Console.ForegroundColor
+            = ConsoleColor.Blue;
+            try
+            {
+                //Recipe displayed
+                Console.WriteLine("" + "\n" +
+                "******************************" + "\n" +
+                "--------------------" + "\n" +
+                "Here is your recipe:" + "\n" +
+                "--------------------" + "\n");
+                foreach (var ingredient in IngArray)
+                {
+                    Console.WriteLine($"{ingredient.IngQuantity} {ingredient.UoM} - {ingredient.IngName}"); ;
+                }
+            }
+            catch
+            {
+                //Error handling
+                Console.ForegroundColor
+                    = ConsoleColor.White;
+                Console.WriteLine("Something went wrong with the recipe display, please try again");
+                //Restarts program
+                ProgramStart();
+            }
+            //Sets text colour back to white
+            Console.ForegroundColor
+                    = ConsoleColor.White;
+        }
 
         //ClearData clears data from IngArray and UserSteps, allowing for a clean start.
         public static void ClearData(Ingredients[] IngArray, UserSteps[] userSteps)
@@ -572,7 +607,7 @@ namespace IngProgram
             {
                 ProgramStart();
 
-            //If user chooses not to start a new recipe, application will close    
+                //If user chooses not to start a new recipe, application will close    
             }
             else
             {
