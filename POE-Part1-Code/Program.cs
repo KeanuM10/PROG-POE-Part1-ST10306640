@@ -158,6 +158,12 @@ namespace IngProgram
                             break;
                     }
 
+                    //Prompts user to enter a valid option
+                    if(UoM != "1" ||UoM !="2" ||UoM !="3" ||UoM !="4" ||UoM !="5" ||UoM !="6" ||UoM !="7" ||UoM !="8") 
+                    {
+                        Console.WriteLine("Please select a valid option");
+                    }
+
                     //stores user input into the array
                     IngArray[i] = new Ingredients(IngName, IngQuantity, UoM);
                 }
@@ -570,6 +576,7 @@ namespace IngProgram
             }
             else
             {
+                Console.WriteLine("Application closed...");
                 Environment.Exit(0);
             }
         }
