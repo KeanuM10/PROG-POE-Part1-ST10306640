@@ -9,13 +9,21 @@ namespace IngProgram
         public string IngName;
         public double IngQuantity;
         public string UoM;
+        public int calCount;
+
+        public int totalCal;
+
+        public string foodGroup;
 
         //Variables now initialzed
-        public Ingredients(string IngName, double IngQuantity, string UoM)
+        public Ingredients(string IngName, double IngQuantity, string UoM, int totalCal, string foodGroup, int calCount)
         {
             this.IngName = IngName;
             this.IngQuantity = IngQuantity;
             this.UoM = UoM;
+            this.totalCal = totalCal;
+            this.foodGroup = foodGroup;
+            this.calCount = calCount;
         }
     }
     //Variable Decleration
@@ -135,21 +143,68 @@ namespace IngProgram
         }
 
         //SaveIngredients() allows for user input and saves the Ingredients info to the array.
-        public static void SaveIngredients(Ingredients[] IngArray)
+        public static void SaveIngredients(List<Ingredients> IngList, int ingCounter)
         {
             int x = 1;
+            int totalCal = 0;
             try
             {
-                for (int i = 0; i < IngArray.Length; i++)
+                for (int i = 0; i < ingCounter; i++)
                 {
                     Console.WriteLine("Please enter name of ingredient: " + x++);
                     string IngName = Console.ReadLine();
+
+                    //Prompts user for calorie count - to see if total exceeds 300
+                    Console.WriteLine("Please enter calorie count for: " + IngName);
+                    int calCount = Convert.ToInt32(Console.ReadLine());
+
+                    totalCal = totalCal + calCount;
+
+                    //Allows the user to select a valid food group for each ingredient
+                    Console.WriteLine(
+                        "Please select food group of: " + IngName + "\n" +
+                        "1. - Carbohydrates"  + "\n" +
+                        "2. - Protein" + "\n" + 
+                        "3. - Dairy Based" + "\n" + 
+                        "4. - Fruits/Vegetables"  + "\n" +
+                        "5. - Fats/Sugars" + "\n" + 
+                        "6. - Other" + "\n"
+                    );
+
+                    string foodGroup = Console.ReadLine();
+
+                    switch (foodGroup)
+                    {
+                        case "1":
+                            foodGroup = "Carbohydrates";
+                            break;
+                        case "2":
+                            foodGroup = "Protein";
+                            break;
+                        case "3":
+                            foodGroup = "Dairy Based";
+                            break;
+                        case "4":
+                            foodGroup = "Fruit/Vegetables";
+                            break;
+                        case "5":
+                            foodGroup = "Fats/Sugars";
+                            break;
+                        case "6":
+                            foodGroup = "Other";
+                            break;
+                        default:
+                            Console.WriteLine("Please select a valid option");
+                            SaveIngredients(IngList, ingCounter);
+                            break;
+                    }
+
                     if (IngName.Length == 0)
                     {
 
                         //Error Handling
                         Console.WriteLine("Please add a valid word:");
-                        SaveIngredients(IngArray);
+                        SaveIngredients(IngList, ingCounter);
                     }
 
                     //Turned to a double to allow for usage of commas if values are les than 1
@@ -228,9 +283,11 @@ namespace IngProgram
 
                     }
 
-
-                    //stores user input into the array
-                    IngArray[i] = new Ingredients(IngName, IngQuantity, UoM);
+                    //Creating a new Ingredient instance
+                    Ingredients newIngredient = new Ingredients(IngName, IngQuantity, UoM, totalCal, foodGroup, calCount);
+                    
+                    //Adding the new ingredient to the List
+                    IngList.Add(newIngredient);
                 }
             }
             catch
@@ -238,7 +295,7 @@ namespace IngProgram
                 //Error handling
                 Console.WriteLine("Oh no! That wasn't correct, please try again");
                 //Recall method
-                SaveIngredients(IngArray);
+                SaveIngredients(IngList, ingCounter);
             }
         }
 
