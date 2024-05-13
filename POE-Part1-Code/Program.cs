@@ -75,11 +75,12 @@ namespace IngProgram
         {
             //Menu added so program will no longer be sequential
             Console.WriteLine("+-----------------------------------+" +
-            "\n" + "| What would you like to do?                   |" +
-            "\n" + "| 1 - Add a new recipe:                        |" + 
-            "\n" + "| 2 - View a recipe:                           |" + 
-            "\n" + "| 3 - Factor quantities of a recipe:           |" +
-            "\n" + "| 4 - Exit:                                    |",
+            "\n" +            "| What would you like to do?        |" +
+            "\n" +            "| 1 - Add a new recipe:             |" + 
+            "\n" +            "| 2 - View a recipe:                |" + 
+            "\n" +            "| 3 - Factor quantities of a recipe:|" +
+            "\n" +            "| 4 - Exit:                         |" +
+            "\n" +            "+-----------------------------------+",
             Console.BackgroundColor = ConsoleColor.White,
             Console.ForegroundColor = ConsoleColor.Black            
             );
@@ -371,310 +372,144 @@ namespace IngProgram
 
         //FactorIngredients() allows user to scale the factor of IngQuantity or follows necessary actions (exit or proceed to steps).
         //UoM is scaled accordingly here, measurements are converted to more appropriate values.
-        public static void FactorIngredients(Ingredients[] IngArray, UserSteps[] stepCount)
+        public static void FactorIngredients(List<Ingredients> IngList, List<UserSteps> stepList, string recName)
         {
             double factorScale;
             bool factorScaleCheck = false;
 
-            Console.WriteLine("Would you like to scale the factor of your ingredients? Type Yes or Anything to skip");
+            Console.WriteLine($"Would you like to scale the factor of the ingredient for recipe '{recName}'? Yes or No");
             var factorCheck = Console.ReadLine();
             factorCheck = factorCheck.ToLower();
 
 
             //while statment ensuring user loops if incorrect values are used
-            while (factorScaleCheck == false)
+            while (!factorScaleCheck)
             {
                 //if statment checking for valid input and then applying needed factor
                 if (factorCheck == "yes" || factorCheck == "y")
                 {
-                    Console.WriteLine("Please select your factor scale (Enter the corresponding letter): A: x0.5, B: x2, or C: x3");
-                    var factorValue = Console.ReadLine();
-                    factorValue = factorValue.ToUpper();
+                    Console.WriteLine("Please select your factor scale (Enter the corresponding letter):" + "\n" +
+                                      "A: x0.5" + "\n" + 
+                                      "B: x2" + "\n" + 
+                                      "C: x3");
+                    string factorChoice = Console.ReadLine().ToUpper();
 
-                    if (factorValue == "A")
+                    switch (factorChoice)
                     {
-                        factorScale = 0.5;
-
-                        //Changes wording colour
-                        Console.ForegroundColor
-                                = ConsoleColor.Green;
-
-                        Console.WriteLine("Here is the updated recipe: " + "\n");
-                        //foreach statement looping through IngArray to apply factors and display updated recipe
-                        foreach (var ingredient in IngArray)
-                        {
-
-                            double updatedQuantity = ingredient.IngQuantity * factorScale;
-
-                            if (updatedQuantity >= 1000 && ingredient.UoM == "Gram/s")
-                            {
-                                updatedQuantity = updatedQuantity / 1000;
-                                ingredient.UoM = "Kilogram/s";
-                            }
-
-                            if (updatedQuantity <= 1 && ingredient.UoM == "Kilogram/s")
-                            {
-                                updatedQuantity = updatedQuantity * 1000;
-                                ingredient.UoM = "Gram/s";
-                            }
-
-                            if (updatedQuantity >= 1000 && ingredient.UoM == "Milliliter/s")
-                            {
-                                updatedQuantity = updatedQuantity / 1000;
-                                ingredient.UoM = "Liter/s";
-                            }
-
-                            if (updatedQuantity <= 1 && ingredient.UoM == "Liter/s")
-                            {
-                                updatedQuantity = updatedQuantity * 1000;
-                                ingredient.UoM = "Milliliter/s";
-                            }
-
-                            if (ingredient.UoM == "Teaspoon/s")
-                            {
-                                if (updatedQuantity >= 3)
-                                {
-                                    updatedQuantity = updatedQuantity / 3;
-                                    ingredient.UoM = "Tablespoon/s";
-                                }
-                                else if (updatedQuantity < 1)
-                                {
-                                    updatedQuantity = updatedQuantity * 3;
-                                    ingredient.UoM = "Tablespoon/s";
-                                }
-                            }
-
-                            if (ingredient.UoM == "Tablespoon/s")
-                            {
-                                if (updatedQuantity >= 16)
-                                {
-                                    updatedQuantity = updatedQuantity / 16;
-                                    ingredient.UoM = "Cup/s";
-                                }
-                                else if (updatedQuantity < 1)
-                                {
-                                    updatedQuantity = updatedQuantity * 3;
-                                    ingredient.UoM = "Teaspoon/s";
-                                }
-                            }
-
-                            if (ingredient.UoM == "Cup/s")
-                            {
-                                if (updatedQuantity < 1)
-                                {
-                                    updatedQuantity = updatedQuantity * 16;
-                                    ingredient.UoM = "Tablespoon/s";
-                                }
-                            }
-
-                            Console.WriteLine("***************");
-                            Console.WriteLine($"{updatedQuantity} {ingredient.UoM} - {ingredient.IngName}");
-                            Console.WriteLine("---------------");
-                        }
-
-                        //To change colour back to white
-                        Console.ForegroundColor
-                                = ConsoleColor.White;
-
-                        factorScaleCheck = true;
+                        case "A":
+                            factorScale = 0.5;
+                            break;
+                        case "B":
+                            factorScale = 2;
+                            break;
+                        case "C":
+                            factorScale = 3;
+                            break;
+                        default:
+                            Console.WriteLine("Invalid choice. Please enter A, B or C.");
+                            //Retry until a valid choice has been selected
+                            continue;
                     }
-                    else if (factorValue == "B")
-                    {
-                        factorScale = 2;
-                        Console.ForegroundColor
-                                = ConsoleColor.Green;
-                        Console.WriteLine("Here is the updated recipe: " + "\n");
-                        //foreach statement looping through IngArray to apply factors and display updated recipe
-                        foreach (var ingredient in IngArray)
-                        {
-                            double updatedQuantity = ingredient.IngQuantity * factorScale;
 
-                            if (updatedQuantity >= 1000 && ingredient.UoM == "Gram/s")
-                            {
-                                updatedQuantity = updatedQuantity / 1000;
-                                ingredient.UoM = "Kilogram/s";
-                            }
-
-                            if (updatedQuantity <= 1 && ingredient.UoM == "Kilogram/s")
-                            {
-                                updatedQuantity = updatedQuantity * 1000;
-                                ingredient.UoM = "Gram/s";
-                            }
-
-                            if (updatedQuantity >= 1000 && ingredient.UoM == "Milliliter/s")
-                            {
-                                updatedQuantity = updatedQuantity / 1000;
-                                ingredient.UoM = "Liter/s";
-                            }
-
-                            if (updatedQuantity <= 1 && ingredient.UoM == "Liter/s")
-                            {
-                                updatedQuantity = updatedQuantity * 1000;
-                                ingredient.UoM = "Milliliter/s";
-                            }
-
-                            if (ingredient.UoM == "Teaspoon/s")
-                            {
-                                if (updatedQuantity >= 3)
-                                {
-                                    updatedQuantity = updatedQuantity / 3;
-                                    ingredient.UoM = "Tablespoon/s";
-                                }
-                                else if (updatedQuantity < 1)
-                                {
-                                    updatedQuantity = updatedQuantity * 3;
-                                    ingredient.UoM = "Tablespoon/s";
-                                }
-                            }
-
-                            if (ingredient.UoM == "Tablespoon/s")
-                            {
-                                if (updatedQuantity >= 16)
-                                {
-                                    updatedQuantity = updatedQuantity / 16;
-                                    ingredient.UoM = "Cup/s";
-                                }
-                                else if (updatedQuantity < 1)
-                                {
-                                    updatedQuantity = updatedQuantity * 3;
-                                    ingredient.UoM = "Teaspoon/s";
-                                }
-                            }
-
-                            if (ingredient.UoM == "Cup/s")
-                            {
-                                if (updatedQuantity < 1)
-                                {
-                                    updatedQuantity = updatedQuantity * 16;
-                                    ingredient.UoM = "Tablespoon/s";
-                                }
-                            }
-                            Console.WriteLine("***************");
-                            Console.WriteLine($"{updatedQuantity} {ingredient.UoM} - {ingredient.IngName}");
-                            Console.WriteLine("---------------");
-                        }
-                        Console.ForegroundColor
-                                = ConsoleColor.White;
-
-                        factorScaleCheck = true;
-                    }
-                    else if (factorValue == "C")
-                    {
-                        factorScale = 3;
-                        Console.ForegroundColor
-                                = ConsoleColor.Green;
-                        Console.WriteLine("Here is the updated recipe: " + "\n");
-                        //foreach statement looping through IngArray to apply factors and display updated recipe
-                        foreach (var ingredient in IngArray)
-                        {
-                            double updatedQuantity = ingredient.IngQuantity * factorScale;
-
-                            if (updatedQuantity >= 1000 && ingredient.UoM == "Gram/s")
-                            {
-                                updatedQuantity = updatedQuantity / 1000;
-                                ingredient.UoM = "Kilogram/s";
-                            }
-
-                            if (updatedQuantity <= 1 && ingredient.UoM == "Kilogram/s")
-                            {
-                                updatedQuantity = updatedQuantity * 1000;
-                                ingredient.UoM = "Gram/s";
-                            }
-
-                            if (updatedQuantity >= 1000 && ingredient.UoM == "Milliliter/s")
-                            {
-                                updatedQuantity = updatedQuantity / 1000;
-                                ingredient.UoM = "Liter/s";
-                            }
-
-                            if (updatedQuantity <= 1 && ingredient.UoM == "Liter/s")
-                            {
-                                updatedQuantity = updatedQuantity * 1000;
-                                ingredient.UoM = "Milliliter/s";
-                            }
-
-                            if (ingredient.UoM == "Teaspoon/s")
-                            {
-                                if (updatedQuantity >= 3)
-                                {
-                                    updatedQuantity = updatedQuantity / 3;
-                                    ingredient.UoM = "Tablespoon/s";
-                                }
-                                else if (updatedQuantity < 1)
-                                {
-                                    updatedQuantity = updatedQuantity * 3;
-                                    ingredient.UoM = "Tablespoon/s";
-                                }
-                            }
-
-                            if (ingredient.UoM == "Tablespoon/s")
-                            {
-                                if (updatedQuantity >= 16)
-                                {
-                                    updatedQuantity = updatedQuantity / 16;
-                                    ingredient.UoM = "Cup/s";
-                                }
-                                else if (updatedQuantity < 1)
-                                {
-                                    updatedQuantity = updatedQuantity * 3;
-                                    ingredient.UoM = "Teaspoon/s";
-                                }
-                            }
-
-                            if (ingredient.UoM == "Cup/s")
-                            {
-                                if (updatedQuantity < 1)
-                                {
-                                    updatedQuantity = updatedQuantity * 16;
-                                    ingredient.UoM = "Tablespoon/s";
-                                }
-                            }
-                            Console.WriteLine("***************");
-                            Console.WriteLine($"{updatedQuantity} {ingredient.UoM} - {ingredient.IngName}");
-                            Console.WriteLine("---------------");
-                        }
-                        Console.ForegroundColor
-                                = ConsoleColor.White;
-
-                        factorScaleCheck = true;
-                    }
-                    //else if allowing user to retry, or exit program if an invalid letter is being selected
-                    else if (factorValue != "A" || factorValue != "B" || factorValue != "C")
-                    {
-                        Console.WriteLine("Please enter a valid letter or Z to exit the program");
-                        string exitIng = Console.ReadLine();
-
-                        if (exitIng == "Z" || exitIng == "z")
-                        {
-                            Environment.Exit(0);
-                        }
-                        factorScaleCheck = false;
-                    }
-                    //Main if statment else block
-                }
-                else
-                {
-                    Console.WriteLine("No Factor applied to quantities");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"Here is the updated recipe for '{recName}': \n");
+                    FactorUpdate(IngList, factorScale);
+                    Console.ForegroundColor = ConsoleColor.White;
                     factorScaleCheck = true;
                 }
-                //Allows user to reset quantities back to original input
-                Console.WriteLine("Would you like to reset your quantities? Type R to reset or anything to skip");
-                string resetCheck = Console.ReadLine();
-                resetCheck = resetCheck.ToUpper();
-
-                Console.ForegroundColor
-                            = ConsoleColor.Magenta;
-
-                if (resetCheck == "R")
+                else if (factorCheck == "no" || factorCheck == "n")
                 {
-                    Console.WriteLine("Here is the recipe with the reset values: ");
-                    //Displays original values given by user. Effectively resetting values
-                    OriginalRecipe(IngArray, stepCount);
-                    Console.ForegroundColor
-                            = ConsoleColor.White;
+                    Console.WriteLine("No factor applied to recipe.");
+                    factorScaleCheck = true;
+                }
+                else 
+                {
+                    Console.WriteLine("Invalid choice, please enter 'yes' or 'no'");
+                    factorCheck = Console.ReadLine();
+                }
+            }
+
+            Console.WriteLine($"Would you like to reset the quantities of '{recName}'? Yes or No");
+            string resetChoice = Console.ReadLine().ToLower();
+
+            if (resetChoice == "yes" || resetChoice == "y")
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Here is the recipe for {recName} with the original values:");
+                OriginalRecipe(IngList, stepList, recName);
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            else
+            {
+                Console.WriteLine("No reset applied to recipe");
+            }
+        }
+
+        public static void FactorUpdate(List<Ingredients> IngList, double factorScale)
+        {
+            foreach (var ingredient in IngList)
+            {
+                double updatedQuantity = ingredient.IngQuantity * factorScale;
+                string updatedUoM = ingredient.UoM;
+
+                if(updatedUoM == "Gram/s" && updatedQuantity >= 1000)
+                {
+                    updatedQuantity /= 1000;
+                    updatedUoM = "Kilogram/s";
+                }
+
+                if (updatedUoM == "Kilogram/s" && updatedQuantity <= 1)
+                {
+                    updatedQuantity *= 1000;
+                    updatedUoM = "Gram/s";
+                }
+
+                if (updatedUoM == "Milliliter/s" && updatedQuantity >= 1000)
+                {
+                    updatedQuantity /= 1000;
+                    updatedUoM = "Liter/s";
+                }
+
+                if (updatedUoM == "Liter/s" && updatedQuantity <= 1)
+                {
+                    updatedQuantity *= 1000;
+                    updatedUoM = "Milliliter/s";
+                }
+
+                if (updatedUoM == "Teaspoon/s")
+                {
+                    if (updatedQuantity >= 3)
+                    {
+                        updatedQuantity /= 3;
+                        updatedUoM = "Tablespoon/s";
+                    }
+                    else if (updatedQuantity < 1)
+                    {
+                        updatedQuantity *= 3;
+                        updatedUoM = "Tablespoon/s";
+                    }
+                }
+
+                if ( updatedUoM == "Tablespoon/s")
+                {
+                    if (updatedQuantity >= 16)
+                    {
+                        updatedQuantity /= 16;
+                        updatedUoM = "Cup/s";
+                    }
+                    else if (updatedQuantity < 1)
+                    {
+                        updatedQuantity *= 3;
+                        updatedUoM = "Teaspoon/s";
+                    }
+
+                    Console.WriteLine("***************");
+                    Console.WriteLine($"{updatedQuantity} {updatedUoM} - {ingredient.IngName}");
+                    Console.WriteLine("---------------");
                 }
             }
         }
+
         //OriginalRecipe() displays original values, effectively reseting given values.
         public static void OriginalRecipe(Ingredients[] IngArray, UserSteps[] stepCount)
         {
