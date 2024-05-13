@@ -99,9 +99,11 @@ namespace IngProgram
                     break;
                 case "2":
                     //View a recipe
+
                     break;
                 case "3":
                     //Factor quantities of a specific recipe
+                    FactorRecipeQuantities();
                     break;
                 case "4":
                     Environment.Exit(0);
@@ -368,6 +370,35 @@ namespace IngProgram
             //Sets text colour back to white
             Console.ForegroundColor
                     = ConsoleColor.White;
+        }
+
+        public static void FactorRecipeQuantities()
+        {
+            if (Recipes.Count == 0)
+            {
+                Console.WriteLine("No recipes to factor, please add a recipe first \n");
+                ProgramStart();
+            }
+
+            Console.WriteLine("Enter the name of the recipe you want to factor - '0' to return to menu");
+            string recipeName = Console.ReadLine();
+
+            if (recipeName == "0")
+            {
+                ProgramStart();
+                return;
+            }
+            
+            if (Recipes.ContainsKey(recipeName))
+            {
+                Recipe selectedRecipe = Recipes[recipeName];
+                FactorIngredients(selectedRecipe.IngList, selectedRecipe.StepList, recipeName);
+            }
+            else
+            {
+                Console.WriteLine("Invalid recipe name. please enter a valid recipe");
+                FactorRecipeQuantities();
+            }
         }
 
         //FactorIngredients() allows user to scale the factor of IngQuantity or follows necessary actions (exit or proceed to steps).
