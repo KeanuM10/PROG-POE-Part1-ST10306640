@@ -3,16 +3,18 @@ using Microsoft.VisualBasic;
 
 namespace IngProgram
 {
+    //Create a delegate for the calorie count cap
+    public delegate void CalorieCountEvent (int totalCal);
     //Variable Decleration
     public class Ingredients
     {
+        public event CalorieCountEvent CalorieCountCap;
+
         public string IngName;
         public double IngQuantity;
         public string UoM;
         public int calCount;
-
         public int totalCal;
-
         public string foodGroup;
 
         //Variables now initialzed
@@ -24,6 +26,14 @@ namespace IngProgram
             this.totalCal = totalCal;
             this.foodGroup = foodGroup;
             this.calCount = calCount;
+        }
+
+        public void CheckCalorieCount()
+        {
+            if (CalorieCountCap != null && totalCal >= 300)
+            {
+                CalorieCountCap(totalCal);
+            }
         }
     }
     //Variable Decleration
@@ -331,6 +341,8 @@ namespace IngProgram
                     //Creating a new Ingredient instance
                     Ingredients newIngredient = new Ingredients(IngName, IngQuantity, UoM, totalCal, foodGroup, calCount);
 
+                    newIngredient.CalorieCountCap += CalorieCountReached;
+
                     //Adding the new ingredient to the List
                     IngList.Add(newIngredient);
                 }
@@ -394,6 +406,11 @@ namespace IngProgram
                 Console.WriteLine("Invalid recipe name. please enter a valid recipe");
                 FactorRecipeQuantities();
             }
+        }
+
+        public static void CalorieCountReached(int totalCal)
+        {
+            Console.WriteLine($"Calorie Count exceeds 300! Total Calorie Count: {totalCal}");
         }
 
         //FactorIngredients() allows user to scale the factor of IngQuantity or follows necessary actions (exit or proceed to steps).
