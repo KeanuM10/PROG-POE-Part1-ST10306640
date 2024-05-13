@@ -106,7 +106,7 @@ namespace IngProgram
             }
             catch
             {
-
+                Console.WriteLine("An error occured within the application, please try again");
                 ProgramStart();
             }
         }
@@ -141,7 +141,7 @@ namespace IngProgram
                     break;
                 case "2":
                     //View a recipe
-
+                    ViewRecipe();
                     break;
                 case "3":
                     //Factor quantities of a specific recipe
@@ -170,7 +170,7 @@ namespace IngProgram
                 Console.WriteLine("A recipe with this name already exists, please enter a new name");
                 AddRecipe();
             }
-            Console.WriteLine($"Please enter the number og ingredients in: {recName}");
+            Console.WriteLine($"Please enter the number of ingredients in: {recName}");
             int ingCounter = int.Parse(Console.ReadLine());
 
             SaveIngredients(ingList, ingCounter);
