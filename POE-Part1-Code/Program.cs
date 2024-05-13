@@ -511,36 +511,30 @@ namespace IngProgram
         }
 
         //OriginalRecipe() displays original values, effectively reseting given values.
-        public static void OriginalRecipe(Ingredients[] IngArray, UserSteps[] stepCount)
+        public static void OriginalRecipe(List<Ingredients> IngList, List<UserSteps> stepList, string recName)
         {
             //Set text colour to blue
-            Console.ForegroundColor
-            = ConsoleColor.Blue;
-            try
+            Console.ForegroundColor = ConsoleColor.Green;
+            
+            Console.WriteLine($"Recipe: {recName} \n");
+
+            Console.WriteLine("Ingredients:");
+            
+            foreach (var ingredient in IngList)
             {
-                //Original Recipe displayed
-                Console.WriteLine("" + "\n" +
-                "******************************" + "\n" +
-                "--------------------" + "\n" +
-                "Here is your recipe:" + "\n" +
-                "--------------------" + "\n");
-                foreach (var ingredient in IngArray)
-                {
-                    Console.WriteLine($"{ingredient.IngQuantity} {ingredient.UoM} - {ingredient.IngName}"); ;
-                }
+                Console.WriteLine($"{ingredient.IngQuantity} {ingredient.UoM} - {ingredient.IngName}");
+                Console.WriteLine($"Food Group: {ingredient.foodGroup}");
+                Console.WriteLine($"Calorie Count: {ingredient.calCount} \n");
             }
-            catch
+
+            Console.WriteLine("Recipe Steps:");
+            int stepNum = 1;
+
+            foreach (var step in stepList)
             {
-                //Error handling
-                Console.ForegroundColor
-                    = ConsoleColor.White;
-                Console.WriteLine("Something went wrong with the recipe reset, please try again");
-                //Restarts program
-                ProgramStart();
+                Console.WriteLine($"Step {stepNum++}: {step.userStepCount}");
             }
-            //Sets text colour back to white
-            Console.ForegroundColor
-                    = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         //ClearData clears data from IngArray and UserSteps, allowing for a clean start.
