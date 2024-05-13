@@ -206,12 +206,6 @@ namespace IngProgram
                     Console.WriteLine("Please enter name of ingredient: " + x++ + "\n");
                     string IngName = Console.ReadLine();
 
-                    //Prompts user for calorie count - to see if total exceeds 300
-                    Console.WriteLine("Please enter calorie count for: " + IngName + "\n");
-                    int calCount = Convert.ToInt32(Console.ReadLine());
-
-                    totalCal = totalCal + calCount;
-
                     //Allows the user to select a valid food group for each ingredient
                     Console.WriteLine(
                         "Please select food group of: " + IngName + "\n" +
@@ -335,6 +329,12 @@ namespace IngProgram
 
                     }
 
+                    //Prompts user for calorie count - to see if total exceeds 300
+                    Console.WriteLine("Please enter calorie count for: " + IngName + "\n");
+                    int calCount = Convert.ToInt32(Console.ReadLine());
+
+                    totalCal = totalCal + calCount;
+
                     //Creating a new Ingredient instance
                     Ingredients newIngredient = new Ingredients(IngName, IngQuantity, UoM, totalCal, foodGroup, calCount);
 
@@ -387,6 +387,14 @@ namespace IngProgram
             }
 
             Console.WriteLine("Enter the name of the recipe you want to factor - '0' to return to menu\n");
+
+            int index = 1;
+
+            foreach (var recipe in Recipes)
+            {
+                Console.WriteLine($"{index++}. {recipe.Key}");
+            }
+
             string recipeName = Console.ReadLine();
 
             if (recipeName == "0")
@@ -499,6 +507,7 @@ namespace IngProgram
             {
                 double updatedQuantity = ingredient.IngQuantity * factorScale;
                 string updatedUoM = ingredient.UoM;
+                double updatedCals = ingredient.calCount * factorScale;
 
                 if (updatedUoM == "Gram/s" && updatedQuantity >= 1000)
                 {
@@ -552,12 +561,11 @@ namespace IngProgram
                     }
                 }
 
-            foreach (var item in IngList)
-            {
-                Console.WriteLine($"{ingredient.IngQuantity} {ingredient.UoM} - {ingredient.IngName}");
+                Console.WriteLine($"{updatedQuantity} {updatedUoM} - {ingredient.IngName}");
                 Console.WriteLine($"Food Group: {ingredient.foodGroup}");
-                Console.WriteLine($"Calorie Count: {ingredient.calCount} \n");
-            }
+                Console.WriteLine($"Calorie Count: {Math.Round(updatedCals)} \n");
+
+            
             }
         }
 
@@ -588,7 +596,7 @@ namespace IngProgram
             Console.ForegroundColor = ConsoleColor.White;
         }
 
-        //ClearData clears data from IngArray and UserSteps, allowing for a clean start.
+        //ViewRecipe() allows user to enter a created recipe to view it as is.
         public static void ViewRecipe()
         {
             if (Recipes.Count == 0)
