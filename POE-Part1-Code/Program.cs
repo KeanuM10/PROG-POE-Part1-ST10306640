@@ -300,17 +300,17 @@ namespace IngProgram
         }
 
         //UserSteps methods uses stepCount and saves user's steps to system temporarily (while running).
-        public static void UserSteps(UserSteps[] stepCount)
+        public static void UserSteps(List<UserSteps> stepList, int userStepCount)
         {
             int x = 1;
             try
             {
-                for (int i = 0; i < stepCount.Length; i++)
+                for (int i = 0; i < userStepCount; i++)
                 {
                     //Asks user for next step while displaying step number
                     Console.WriteLine("Please enter step " + x++ + " for this recipe:");
                     var stepWritten = Console.ReadLine();
-                    stepCount[i] = new UserSteps(stepWritten);
+                    stepList.Add(new UserSteps(stepWritten));
                 }
             }
             catch
@@ -318,7 +318,7 @@ namespace IngProgram
                 //Error handling
                 Console.WriteLine("That doesn't look right :( lets give it another go");
                 //Recall method
-                UserSteps(stepCount);
+                UserSteps(stepList, userStepCount);
             }
         }
 
