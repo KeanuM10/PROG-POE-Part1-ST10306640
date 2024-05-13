@@ -232,7 +232,7 @@ namespace IngProgram
                 "--------------------------" + "\n" +
                 "Here are the recipe steps:" + "\n" +
                 "--------------------------" + "\n");
-                for (int i = 1; i < stepCount.Count(); i++)
+                for (int i = 1; i <= stepCount.Count(); i++)
                 {
                     foreach (var step in stepCount)
                     {
