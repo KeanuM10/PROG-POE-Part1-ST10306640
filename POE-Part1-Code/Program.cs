@@ -52,7 +52,7 @@ namespace IngProgram
         }
 
         //DisplayRecipe method takes values from both arrays and displays the recipe and steps for recipe in a neat manner.
-        public static void DisplayRecipe(string name, List<Ingredients> IngList, List<UserSteps> StepList, int totalCal)
+        public void DisplayRecipe()
         {
             //Set text colour to blue
             Console.ForegroundColor
@@ -61,7 +61,7 @@ namespace IngProgram
             Console.WriteLine("" +
                               "******************************\n" +
                               "---------------\n" +
-                              $"Recipe: {name}\n" +
+                              $"Recipe: {Name}\n" +
                               "---------------\n");
 
             Console.WriteLine("Ingredients");
@@ -73,7 +73,6 @@ namespace IngProgram
                 Console.WriteLine("");
 
             }
-            Console.WriteLine($"Total Calorie Count - {totalCal}");
 
             Console.WriteLine("" +
                               "******************************\n" +
@@ -565,25 +564,46 @@ namespace IngProgram
         }
 
         //ClearData clears data from IngArray and UserSteps, allowing for a clean start.
-        public static void ClearData(Ingredients[] IngArray, UserSteps[] userSteps)
+        public static void ViewRecipe()
         {
-            Console.WriteLine("Would you like to clear and start a new recipe? type \"new\" or anything else to close application");
-            string newRecipe = Console.ReadLine();
-            newRecipe = newRecipe.ToUpper();
-
-            //Clears arrays
-            if (newRecipe == "NEW")
+            if (Recipes.Count == 0)
             {
+                Console.WriteLine("Please add a recipe first before viewing\n");
                 ProgramStart();
-
-                //If user chooses not to start a new recipe, application will close    
             }
             else
             {
-                Console.WriteLine("Application closed...");
-                //Closes Application
-                Environment.Exit(0);
+                Console.WriteLine("Here are the avliable recipes: Press '0' to return to menu");
             }
+
+            int index = 1;
+
+            foreach (var recipe in Recipes)
+            {
+                Console.WriteLine($"{index++}. {recipe.Key}");
+            }
+
+            string choice = Console.ReadLine();
+
+            if (choice == "0")
+            {
+                ProgramStart();
+                return;
+            }
+
+            if (Recipes.ContainsKey(choice))
+            {
+                Recipes[choice].DisplayRecipe();
+            }
+            else
+            {
+                Console.WriteLine("Invalid recipe name. please enter a valid recipe");
+                ViewRecipe();
+            }
+
+            Console.WriteLine("Press any key to return to menu");
+            Console.ReadKey();
+            ProgramStart();
         }
 
     }
