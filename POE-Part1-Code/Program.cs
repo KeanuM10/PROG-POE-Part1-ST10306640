@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.VisualBasic;
 
 namespace IngProgram
@@ -47,34 +47,41 @@ namespace IngProgram
         //ProgranStart() Method declares needed arrays and call necessary methods, surrounded in a try catch for error handling.
         public static void ProgramStart()
         {
-            try
+            //Menu added so program will no longer be sequential
+            Console.WriteLine("+-----------------------------------+" +
+            "\n" + "| What would you like to do?                   |" +
+            "\n" + "| 1 - Add a new recipe:                        |" + 
+            "\n" + "| 2 - View a recipe:                           |" + 
+            "\n" + "| 3 - Factor quantities of a recipe:           |" +
+            "\n" + "| 4 - Exit:                                    |",
+            Console.BackgroundColor = ConsoleColor.White,
+            Console.ForegroundColor = ConsoleColor.Black            
+            );
+            //Alter colour of text and background so menu appears more vibrant
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+
+            String menuOption = Console.ReadLine();
+
+            //Switch-case allowing user to select from avaliable menu options
+            switch (menuOption)
             {
-                Console.WriteLine("Please enter number of ingredients in recipe:");
-                int ingCounter = Int32.Parse(Console.ReadLine());
-
-                //Decleration of ingredients array
-                Ingredients[] IngArray = new Ingredients[ingCounter];
-                SaveIngredients(IngArray);
-
-                Console.WriteLine("Please enter the number of steps in recipe: ");
-                var userStepCount = Int32.Parse(Console.ReadLine());
-
-                //Decleration of step counter array
-                UserSteps[] stepCount = new UserSteps[userStepCount];
-                UserSteps(stepCount);
-
-                //Calling of methods
-                DisplayRecipe(IngArray, stepCount);
-
-                FactorIngredients(IngArray, stepCount);
-
-                ClearData(IngArray, stepCount);
-            }
-            catch
-            {
-                //Main error handle, ensures system wont crash
-                Console.WriteLine("The system encountered an error, try again");
-                ProgramStart();
+                case "1":
+                    // add a recipe
+                    break;
+                case "2":
+                    //View a recipe
+                    break;
+                case "3":
+                    //Factor quantities of a specific recipe
+                    break;
+                case "4":
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Please select a valid menu option");
+                    ProgramStart();
+                    break;
             }
         }
 
