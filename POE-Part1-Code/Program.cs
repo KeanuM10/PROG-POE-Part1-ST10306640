@@ -50,6 +50,49 @@ namespace IngProgram
             IngList = ingList;
             StepList = stepList;
         }
+
+        //DisplayRecipe method takes values from both arrays and displays the recipe and steps for recipe in a neat manner.
+        public static void DisplayRecipe(string name, List<Ingredients> IngList, List<UserSteps> StepList, int totalCal)
+        {
+            //Set text colour to blue
+            Console.ForegroundColor
+            = ConsoleColor.Green;
+
+            Console.WriteLine("" +
+                              "******************************\n" +
+                              "---------------\n" +
+                              $"Recipe: {name}\n" +
+                              "---------------\n");
+
+            Console.WriteLine("Ingredients");
+
+            foreach (var ingredient in IngList)
+            {
+                Console.WriteLine($"{ingredient.IngQuantity} {ingredient.UoM} - {ingredient.IngName}: (Calorie Count: {ingredient.calCount})");
+                Console.WriteLine($"Food Group - {ingredient.foodGroup}");
+                Console.WriteLine("");
+
+            }
+            Console.WriteLine($"Total Calorie Count - {totalCal}");
+
+            Console.WriteLine("" +
+                              "******************************\n" +
+                              "-----------------------------\n" +
+                              "Here are the recipe steps:\n" +
+                              "-----------------------------\n");
+
+            int i = 1;
+
+            foreach (var step in StepList)
+            {
+                Console.WriteLine($"Step: {i++} -\n{step.userStepCount}");
+            }
+
+            Console.WriteLine("******************************\n");
+
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
     }
     class IngredientProgram
     {
@@ -75,14 +118,14 @@ namespace IngProgram
         {
             //Menu added so program will no longer be sequential
             Console.WriteLine("+-----------------------------------+" +
-            "\n" +            "| What would you like to do?        |" +
-            "\n" +            "| 1 - Add a new recipe:             |" + 
-            "\n" +            "| 2 - View a recipe:                |" + 
-            "\n" +            "| 3 - Factor quantities of a recipe:|" +
-            "\n" +            "| 4 - Exit:                         |" +
-            "\n" +            "+-----------------------------------+",
+            "\n" + "| What would you like to do?        |" +
+            "\n" + "| 1 - Add a new recipe:             |" +
+            "\n" + "| 2 - View a recipe:                |" +
+            "\n" + "| 3 - Factor quantities of a recipe:|" +
+            "\n" + "| 4 - Exit:                         |" +
+            "\n" + "+-----------------------------------+",
             Console.BackgroundColor = ConsoleColor.White,
-            Console.ForegroundColor = ConsoleColor.Black            
+            Console.ForegroundColor = ConsoleColor.Black
             );
             //Alter colour of text and background so menu appears more vibrant
             Console.BackgroundColor = ConsoleColor.Black;
@@ -123,7 +166,7 @@ namespace IngProgram
             Console.WriteLine("Please enter the name of your recipe: ");
             string recName = Console.ReadLine();
 
-            if(Recipes.ContainsKey(recName))
+            if (Recipes.ContainsKey(recName))
             {
                 Console.WriteLine("A recipe with this name already exists, please enter a new name");
                 AddRecipe();
@@ -140,7 +183,7 @@ namespace IngProgram
 
             Recipe newRecipe = new Recipe(recName, ingList, stepList);
 
-            Recipes.Add(recName,newRecipe);
+            Recipes.Add(recName, newRecipe);
 
             ProgramStart();
         }
@@ -166,11 +209,11 @@ namespace IngProgram
                     //Allows the user to select a valid food group for each ingredient
                     Console.WriteLine(
                         "Please select food group of: " + IngName + "\n" +
-                        "1. - Carbohydrates"  + "\n" +
-                        "2. - Protein" + "\n" + 
-                        "3. - Dairy Based" + "\n" + 
-                        "4. - Fruits/Vegetables"  + "\n" +
-                        "5. - Fats/Sugars" + "\n" + 
+                        "1. - Carbohydrates" + "\n" +
+                        "2. - Protein" + "\n" +
+                        "3. - Dairy Based" + "\n" +
+                        "4. - Fruits/Vegetables" + "\n" +
+                        "5. - Fats/Sugars" + "\n" +
                         "6. - Other" + "\n"
                     );
 
@@ -230,12 +273,12 @@ namespace IngProgram
                     bool UomCheck = false;
                     while (UomCheck == false)
                     {
-                        if(!(UoM.Length == 1 && (UoM[0] >= '1' || UoM[0] <= '8'))) 
+                        if (!(UoM.Length == 1 && (UoM[0] >= '1' || UoM[0] <= '8')))
                         {
-                        Console.WriteLine("Please select a valid option (1-8).");
-                        UoM = Console.ReadLine();
+                            Console.WriteLine("Please select a valid option (1-8).");
+                            UoM = Console.ReadLine();
                         }
-                         else if (UoM.Length == 1 && (UoM[0] >= '1' || UoM[0] <= '8'))
+                        else if (UoM.Length == 1 && (UoM[0] >= '1' || UoM[0] <= '8'))
                         {
                             //Switch case to convert user selection
                             switch (UoM)
@@ -288,7 +331,7 @@ namespace IngProgram
 
                     //Creating a new Ingredient instance
                     Ingredients newIngredient = new Ingredients(IngName, IngQuantity, UoM, totalCal, foodGroup, calCount);
-                    
+
                     //Adding the new ingredient to the List
                     IngList.Add(newIngredient);
                 }
@@ -325,53 +368,6 @@ namespace IngProgram
             }
         }
 
-        //DisplayRecipe method takes values from both arrays and displays the recipe and steps for recipe in a neat manner.
-        public static void DisplayRecipe(Ingredients[] IngArray, UserSteps[] stepCount)
-        {
-            //Set text colour to blue
-            Console.ForegroundColor
-            = ConsoleColor.Blue;
-            try
-            {
-                //Recipe displayed
-                Console.WriteLine("" + "\n" +
-                "******************************" + "\n" +
-                "--------------------" + "\n" +
-                "Here is your recipe:" + "\n" +
-                "--------------------" + "\n");
-                foreach (var ingredient in IngArray)
-                {
-                    Console.WriteLine($"{ingredient.IngQuantity} {ingredient.UoM} - {ingredient.IngName}"); ;
-                }
-                Console.WriteLine("" + "\n" +
-                "******************************" + "\n" +
-                "--------------------------" + "\n" +
-                "Here are the recipe steps:" + "\n" +
-                "--------------------------" + "\n");
-                for (int i = 1; i <= stepCount.Count(); i++)
-                {
-                    foreach (var step in stepCount)
-                    {
-                        Console.WriteLine("Step:" + i++ + " -" + "\n" + $"{step.userStepCount}");
-
-                    }
-                    Console.WriteLine("******************************" + "\n");
-                }
-            }
-            catch
-            {
-                //Error handling
-                Console.ForegroundColor
-                    = ConsoleColor.White;
-                Console.WriteLine("Something went wrong with the recipe display, please try again");
-                //Restarts program
-                ProgramStart();
-            }
-            //Sets text colour back to white
-            Console.ForegroundColor
-                    = ConsoleColor.White;
-        }
-
         public static void FactorRecipeQuantities()
         {
             if (Recipes.Count == 0)
@@ -388,7 +384,7 @@ namespace IngProgram
                 ProgramStart();
                 return;
             }
-            
+
             if (Recipes.ContainsKey(recipeName))
             {
                 Recipe selectedRecipe = Recipes[recipeName];
@@ -420,8 +416,8 @@ namespace IngProgram
                 if (factorCheck == "yes" || factorCheck == "y")
                 {
                     Console.WriteLine("Please select your factor scale (Enter the corresponding letter):" + "\n" +
-                                      "A: x0.5" + "\n" + 
-                                      "B: x2" + "\n" + 
+                                      "A: x0.5" + "\n" +
+                                      "B: x2" + "\n" +
                                       "C: x3");
                     string factorChoice = Console.ReadLine().ToUpper();
 
@@ -453,7 +449,7 @@ namespace IngProgram
                     Console.WriteLine("No factor applied to recipe.");
                     factorScaleCheck = true;
                 }
-                else 
+                else
                 {
                     Console.WriteLine("Invalid choice, please enter 'yes' or 'no'");
                     factorCheck = Console.ReadLine();
@@ -483,7 +479,7 @@ namespace IngProgram
                 double updatedQuantity = ingredient.IngQuantity * factorScale;
                 string updatedUoM = ingredient.UoM;
 
-                if(updatedUoM == "Gram/s" && updatedQuantity >= 1000)
+                if (updatedUoM == "Gram/s" && updatedQuantity >= 1000)
                 {
                     updatedQuantity /= 1000;
                     updatedUoM = "Kilogram/s";
@@ -521,7 +517,7 @@ namespace IngProgram
                     }
                 }
 
-                if ( updatedUoM == "Tablespoon/s")
+                if (updatedUoM == "Tablespoon/s")
                 {
                     if (updatedQuantity >= 16)
                     {
@@ -546,11 +542,11 @@ namespace IngProgram
         {
             //Set text colour to blue
             Console.ForegroundColor = ConsoleColor.Green;
-            
+
             Console.WriteLine($"Recipe: {recName} \n");
 
             Console.WriteLine("Ingredients:");
-            
+
             foreach (var ingredient in IngList)
             {
                 Console.WriteLine($"{ingredient.IngQuantity} {ingredient.UoM} - {ingredient.IngName}");
