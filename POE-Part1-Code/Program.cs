@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using Microsoft.VisualBasic;
 
 namespace IngProgram
@@ -81,7 +82,7 @@ namespace IngProgram
                 Console.WriteLine($"{ingredient.IngQuantity} {ingredient.UoM} - {ingredient.IngName}: (Calorie Count: {ingredient.calCount})");
                 Console.WriteLine($"Food Group - {ingredient.foodGroup}");
                 Console.WriteLine("");
-
+                Console.WriteLine("Total Calories: " + ingredient.totalCal);
             }
 
             Console.WriteLine("" +
@@ -126,19 +127,15 @@ namespace IngProgram
         public static void ProgramStart()
         {
             //Menu added so program will no longer be sequential
-            Console.WriteLine("+-----------------------------------+" +
-            "\n" + "| What would you like to do?        |" +
-            "\n" + "| 1 - Add a new recipe:             |" +
-            "\n" + "| 2 - View a recipe:                |" +
-            "\n" + "| 3 - Factor quantities of a recipe:|" +
-            "\n" + "| 4 - Exit:                         |" +
-            "\n" + "+-----------------------------------+",
-            Console.BackgroundColor = ConsoleColor.White,
-            Console.ForegroundColor = ConsoleColor.Black
+            Console.WriteLine(
+                "+-----------------------------------+\n" +
+                "| What would you like to do?        |\n" +
+                "| 1 - Add a new recipe:             |\n" +
+                "| 2 - View a recipe:                |\n" +
+                "| 3 - Factor quantities of a recipe:|\n" +
+                "| 4 - Exit:                         |\n" +
+                "+-----------------------------------+"
             );
-            //Alter colour of text and background so menu appears more vibrant
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.White;
 
             String menuOption = Console.ReadLine();
 
@@ -345,6 +342,8 @@ namespace IngProgram
 
                     //Adding the new ingredient to the List
                     IngList.Add(newIngredient);
+
+                    newIngredient.CheckCalorieCount();
                 }
             }
             catch
@@ -414,7 +413,7 @@ namespace IngProgram
         }
 
         //FactorIngredients() allows user to scale the factor of IngQuantity or follows necessary actions (exit or proceed to steps).
-        //UoM is scaled accordingly here, measurements are converted to more appropriate values.
+        //UoM is scaled accordingly in FactorUpdate, measurements are converted to more appropriate values.
         public static void FactorIngredients(List<Ingredients> IngList, List<UserSteps> stepList, string recName)
         {
             double factorScale;
@@ -457,6 +456,7 @@ namespace IngProgram
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"Here is the updated recipe for '{recName}': \n");
                     FactorUpdate(IngList, factorScale);
+                    
                     Console.ForegroundColor = ConsoleColor.White;
                     factorScaleCheck = true;
                 }
@@ -478,13 +478,16 @@ namespace IngProgram
             if (resetChoice == "yes" || resetChoice == "y")
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"Here is the recipe for {recName} with the original values:");
+                Console.WriteLine($"Here is the recipe for {recName} with the original values:");               
                 OriginalRecipe(IngList, stepList, recName);
                 Console.ForegroundColor = ConsoleColor.White;
+
+                ProgramStart();
             }
             else
             {
                 Console.WriteLine("No reset applied to recipe");
+                ProgramStart();
             }
         }
 
@@ -545,11 +548,14 @@ namespace IngProgram
                         updatedQuantity *= 3;
                         updatedUoM = "Teaspoon/s";
                     }
-
-                    Console.WriteLine("***************");
-                    Console.WriteLine($"{updatedQuantity} {updatedUoM} - {ingredient.IngName}");
-                    Console.WriteLine("---------------");
                 }
+
+            foreach (var item in IngList)
+            {
+                Console.WriteLine($"{ingredient.IngQuantity} {ingredient.UoM} - {ingredient.IngName}");
+                Console.WriteLine($"Food Group: {ingredient.foodGroup}");
+                Console.WriteLine($"Calorie Count: {ingredient.calCount} \n");
+            }
             }
         }
 
@@ -590,7 +596,7 @@ namespace IngProgram
             }
             else
             {
-                Console.WriteLine("Here are the avliable recipes: Press '0' to return to menu");
+                Console.WriteLine("Here are the available recipes: Press '0' to return to menu");
             }
 
             int index = 1;
