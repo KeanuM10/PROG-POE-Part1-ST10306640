@@ -79,10 +79,10 @@ namespace IngProgram
 
             foreach (var ingredient in IngList)
             {
-                Console.WriteLine($"{ingredient.IngQuantity} {ingredient.UoM} - {ingredient.IngName}: (Calorie Count: {ingredient.calCount})");
+                Console.WriteLine($"{ingredient.IngQuantity} {ingredient.UoM} - {ingredient.IngName}");
                 Console.WriteLine($"Food Group - {ingredient.foodGroup}");
                 Console.WriteLine("");
-                Console.WriteLine("Total Calories: " + ingredient.totalCal);
+                Console.WriteLine("Calorie Count: " + ingredient.totalCal);
             }
 
             Console.WriteLine("" +
@@ -134,7 +134,7 @@ namespace IngProgram
                 "| 2 - View a recipe:                |\n" +
                 "| 3 - Factor quantities of a recipe:|\n" +
                 "| 4 - Exit:                         |\n" +
-                "+-----------------------------------+"
+                "+-----------------------------------+\n"
             );
 
             String menuOption = Console.ReadLine();
@@ -169,7 +169,7 @@ namespace IngProgram
             List<Ingredients> ingList = new List<Ingredients>();
             List<UserSteps> stepList = new List<UserSteps>();
 
-            Console.WriteLine("Please enter the name of your recipe: ");
+            Console.WriteLine("Please enter the name of your recipe: \n");
             string recName = Console.ReadLine();
 
             if (Recipes.ContainsKey(recName))
@@ -177,12 +177,12 @@ namespace IngProgram
                 Console.WriteLine("A recipe with this name already exists, please enter a new name");
                 AddRecipe();
             }
-            Console.WriteLine($"Please enter the number of ingredients in: {recName}");
+            Console.WriteLine($"Please enter the number of ingredients in: {recName}\n");
             int ingCounter = int.Parse(Console.ReadLine());
 
             SaveIngredients(ingList, ingCounter);
 
-            Console.WriteLine("Please enter the number of steps in the recipe:");
+            Console.WriteLine("Please enter the number of steps in the recipe:\n");
             int userStepCount = int.Parse(Console.ReadLine());
 
             UserSteps(stepList, userStepCount);
@@ -203,11 +203,11 @@ namespace IngProgram
             {
                 for (int i = 0; i < ingCounter; i++)
                 {
-                    Console.WriteLine("Please enter name of ingredient: " + x++);
+                    Console.WriteLine("Please enter name of ingredient: " + x++ + "\n");
                     string IngName = Console.ReadLine();
 
                     //Prompts user for calorie count - to see if total exceeds 300
-                    Console.WriteLine("Please enter calorie count for: " + IngName);
+                    Console.WriteLine("Please enter calorie count for: " + IngName + "\n");
                     int calCount = Convert.ToInt32(Console.ReadLine());
 
                     totalCal = totalCal + calCount;
@@ -260,7 +260,7 @@ namespace IngProgram
                     }
 
                     //Turned to a double to allow for usage of commas if values are les than 1
-                    Console.WriteLine("Please enter quantity of: " + IngName);
+                    Console.WriteLine("Please enter quantity of: " + IngName + "\n");
                     double IngQuantity = Convert.ToDouble(Console.ReadLine());
 
                     //Allows user to select from custom units of measurment or to enter own
@@ -272,7 +272,7 @@ namespace IngProgram
                     "5. - Teaspoon/s" + "\n" +
                     "6. - Tablespoon/s" + "\n" +
                     "7. - Cup/s" + "\n" +
-                    "8. - Custom Value");
+                    "8. - Custom Value\n");
                     string UoM = Console.ReadLine();
 
                     //Prompts user to enter a valid option
@@ -281,7 +281,7 @@ namespace IngProgram
                     {
                         if (!(UoM.Length == 1 && (UoM[0] >= '1' || UoM[0] <= '8')))
                         {
-                            Console.WriteLine("Please select a valid option (1-8).");
+                            Console.WriteLine("Please select a valid option (1-8).\n");
                             UoM = Console.ReadLine();
                         }
                         else if (UoM.Length == 1 && (UoM[0] >= '1' || UoM[0] <= '8'))
@@ -325,7 +325,7 @@ namespace IngProgram
                                     break;
 
                                 case "8":
-                                    Console.WriteLine("Please enter custom unit of measurment:");
+                                    Console.WriteLine("Please enter custom unit of measurment:\n");
                                     UoM = Console.ReadLine();
                                     Console.WriteLine("Selected Option: " + UoM);
                                     break;
@@ -364,7 +364,7 @@ namespace IngProgram
                 for (int i = 0; i < userStepCount; i++)
                 {
                     //Asks user for next step while displaying step number
-                    Console.WriteLine("Please enter step " + x++ + " for this recipe:");
+                    Console.WriteLine("Please enter step " + x++ + " for this recipe:\n");
                     var stepWritten = Console.ReadLine();
                     stepList.Add(new UserSteps(stepWritten));
                 }
@@ -372,7 +372,7 @@ namespace IngProgram
             catch
             {
                 //Error handling
-                Console.WriteLine("That doesn't look right :( lets give it another go");
+                Console.WriteLine("That doesn't look right :( lets give it another go\n");
                 //Recall method
                 UserSteps(stepList, userStepCount);
             }
@@ -386,7 +386,7 @@ namespace IngProgram
                 ProgramStart();
             }
 
-            Console.WriteLine("Enter the name of the recipe you want to factor - '0' to return to menu");
+            Console.WriteLine("Enter the name of the recipe you want to factor - '0' to return to menu\n");
             string recipeName = Console.ReadLine();
 
             if (recipeName == "0")
@@ -409,7 +409,9 @@ namespace IngProgram
 
         public static void CalorieCountReached(int totalCal)
         {
-            Console.WriteLine($"Calorie Count exceeds 300! Total Calorie Count: {totalCal}");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"\nCalorie Count exceeds 300! Total Calorie Count: {totalCal}\n");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         //FactorIngredients() allows user to scale the factor of IngQuantity or follows necessary actions (exit or proceed to steps).
@@ -419,7 +421,7 @@ namespace IngProgram
             double factorScale;
             bool factorScaleCheck = false;
 
-            Console.WriteLine($"Would you like to scale the factor of the ingredient for recipe '{recName}'? Yes or No");
+            Console.WriteLine($"Would you like to scale the factor of the ingredient for recipe '{recName}'? Yes or No\n");
             var factorCheck = Console.ReadLine();
             factorCheck = factorCheck.ToLower();
 
@@ -433,7 +435,7 @@ namespace IngProgram
                     Console.WriteLine("Please select your factor scale (Enter the corresponding letter):" + "\n" +
                                       "A: x0.5" + "\n" +
                                       "B: x2" + "\n" +
-                                      "C: x3");
+                                      "C: x3\n");
                     string factorChoice = Console.ReadLine().ToUpper();
 
                     switch (factorChoice)
@@ -467,18 +469,18 @@ namespace IngProgram
                 }
                 else
                 {
-                    Console.WriteLine("Invalid choice, please enter 'yes' or 'no'");
+                    Console.WriteLine("Invalid choice, please enter 'yes' or 'no'\n");
                     factorCheck = Console.ReadLine();
                 }
             }
 
-            Console.WriteLine($"Would you like to reset the quantities of '{recName}'? Yes or No");
+            Console.WriteLine($"Would you like to reset the quantities of '{recName}'? Yes or No\n");
             string resetChoice = Console.ReadLine().ToLower();
 
             if (resetChoice == "yes" || resetChoice == "y")
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"Here is the recipe for {recName} with the original values:");               
+                Console.WriteLine($"Here is the recipe for {recName} with the original values:\n");               
                 OriginalRecipe(IngList, stepList, recName);
                 Console.ForegroundColor = ConsoleColor.White;
 
@@ -596,7 +598,7 @@ namespace IngProgram
             }
             else
             {
-                Console.WriteLine("Here are the available recipes: Press '0' to return to menu");
+                Console.WriteLine("Here are the available recipes: Press '0' to return to menu\n");
             }
 
             int index = 1;
@@ -624,7 +626,7 @@ namespace IngProgram
                 ViewRecipe();
             }
 
-            Console.WriteLine("Press any key to return to menu");
+            Console.WriteLine("Press any key to return to menu\n");
             Console.ReadKey();
             ProgramStart();
         }
