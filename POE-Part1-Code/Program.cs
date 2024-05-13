@@ -36,7 +36,7 @@ namespace IngProgram
         public List<Ingredients> IngList;
         public List<UserSteps> StepList;
 
-        public Recipe(string name, List<Ingredients> IngList, List<UserSteps> stepList)
+        public Recipe(string name, List<Ingredients> ingList, List<UserSteps> stepList)
         {
             Name = name;
             IngList = ingList;
@@ -86,6 +86,7 @@ namespace IngProgram
             {
                 case "1":
                     // add a recipe
+                    AddRecipe();
                     break;
                 case "2":
                     //View a recipe
@@ -101,6 +102,36 @@ namespace IngProgram
                     ProgramStart();
                     break;
             }
+        }
+
+        public static void AddRecipe()
+        {
+            List<Ingredients> ingList = new List<Ingredients>();
+            List<UserSteps> stepList = new List<UserSteps>();
+
+            Console.WriteLine("Please enter the name of your recipe: ");
+            string recName = Console.ReadLine();
+
+            if(Recipes.ContainsKey(recName))
+            {
+                Console.WriteLine("A recipe with this name already exists, please enter a new name");
+                AddRecipe();
+            }
+            Console.WriteLine($"Please enter the number og ingredients in: {recName}");
+            int ingCounter = int.Parse(Console.ReadLine());
+
+            SaveIngredients(ingList, ingCounter);
+
+            Console.WriteLine("Please enter the number of steps in the recipe:");
+            int userStepCount = int.Parse(Console.ReadLine());
+
+            UserSteps(stepList, userStepCount);
+
+            Recipe newRecipe = new Recipe(recName, ingList, stepList);
+
+            Recipes.Add(recName,newRecipe);
+
+            ProgramStart();
         }
 
         //SaveIngredients() allows for user input and saves the Ingredients info to the array.
