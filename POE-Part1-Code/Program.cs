@@ -28,8 +28,26 @@ namespace IngProgram
             this.userStepCount = userStepCount;
         }
     }
+
+    //Recipe class created and variables initialzed
+    public class Recipe
+    {
+        public string Name;
+        public List<Ingredients> IngList;
+        public List<UserSteps> StepList;
+
+        public Recipe(string name, List<Ingredients> IngList, List<UserSteps> stepList)
+        {
+            Name = name;
+            IngList = ingList;
+            StepList = stepList;
+        }
+    }
     class IngredientProgram
     {
+        //Created a dictionary
+        public static SortedDictionary<string, Recipe> Recipes = new SortedDictionary<string, Recipe>();
+
         public static void Main(string[] args)
         {
             try
