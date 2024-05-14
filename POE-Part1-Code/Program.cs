@@ -645,7 +645,7 @@ namespace IngProgram
             }
 
             Console.WriteLine("Press any key to return to menu\n");
-            Console.ReadKey();
+            Console.Read();
             ProgramStart();
         }
 
