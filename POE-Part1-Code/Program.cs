@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Text.RegularExpressions;
 using Microsoft.VisualBasic;
 
 namespace IngProgram
 {
     //Create a delegate for the calorie count cap
-    public delegate void CalorieCountEvent (int totalCal);
+    public delegate void CalorieCountEvent(int totalCal);
     //Variable Decleration
     public class Ingredients
     {
@@ -29,6 +29,7 @@ namespace IngProgram
             this.calCount = calCount;
         }
 
+        //Notify user when caloriess
         public void CheckCalorieCount()
         {
             if (CalorieCountCap != null && totalCal >= 300)
@@ -52,9 +53,11 @@ namespace IngProgram
     public class Recipe
     {
         public string Name;
+        //Creation of Lists - Generic Collections
         public List<Ingredients> IngList;
         public List<UserSteps> StepList;
 
+        //Initialize variables for recipe class
         public Recipe(string name, List<Ingredients> ingList, List<UserSteps> stepList)
         {
             Name = name;
@@ -62,13 +65,14 @@ namespace IngProgram
             StepList = stepList;
         }
 
-        //DisplayRecipe method takes values from both arrays and displays the recipe and steps for recipe in a neat manner.
+        //DisplayRecipe method takes values from both lists and displays them to the user in a neat format upon request.
         public void DisplayRecipe()
         {
-            //Set text colour to blue
+            //Set text colour to green
             Console.ForegroundColor
             = ConsoleColor.Green;
 
+            //Display the recipe
             Console.WriteLine("" +
                               "******************************\n" +
                               "---------------\n" +
@@ -76,13 +80,12 @@ namespace IngProgram
                               "---------------\n");
 
             Console.WriteLine("Ingredients");
-
             foreach (var ingredient in IngList)
             {
                 Console.WriteLine($"{ingredient.IngQuantity} {ingredient.UoM} - {ingredient.IngName}");
                 Console.WriteLine($"Food Group - {ingredient.foodGroup}");
+                Console.WriteLine($"Calorie Count: {ingredient.totalCal}");
                 Console.WriteLine("");
-                Console.WriteLine("Calorie Count: " + ingredient.totalCal);
             }
 
             Console.WriteLine("" +
@@ -99,18 +102,19 @@ namespace IngProgram
             }
 
             Console.WriteLine("******************************\n");
-
+            //Revert text color back to white
             Console.ForegroundColor = ConsoleColor.White;
         }
 
     }
     class IngredientProgram
     {
-        //Created a dictionary
+        //Created a dictionary - Sorted so as to display recipe names in alphabetical order
         public static SortedDictionary<string, Recipe> Recipes = new SortedDictionary<string, Recipe>();
 
         public static void Main(string[] args)
         {
+            //Runs the program, try catch for error handling
             try
             {
                 ProgramStart();
@@ -122,8 +126,7 @@ namespace IngProgram
             }
         }
 
-
-        //ProgranStart() Method declares needed arrays and call necessary methods, surrounded in a try catch for error handling.
+        //ProgramStart() displays option menu to user, allowing user to perform multiple actions
         public static void ProgramStart()
         {
             //Menu added so program will no longer be sequential
@@ -155,15 +158,18 @@ namespace IngProgram
                     FactorRecipeQuantities();
                     break;
                 case "4":
+                    //Exit the application
                     Environment.Exit(0);
                     break;
                 default:
+                    //Default informs user to select a valid option
                     Console.WriteLine("Please select a valid menu option");
                     ProgramStart();
                     break;
             }
         }
 
+        //AddRecipe() calls the declared lists and prompts user to add a recipe - name, num of ingredients and steps, adds them to the Lists and returns to menu
         public static void AddRecipe()
         {
             List<Ingredients> ingList = new List<Ingredients>();
@@ -171,7 +177,7 @@ namespace IngProgram
 
             Console.WriteLine("Please enter the name of your recipe: \n");
             string recName = Console.ReadLine();
-
+            //Checks if a recipe with that name exists already
             if (Recipes.ContainsKey(recName))
             {
                 Console.WriteLine("A recipe with this name already exists, please enter a new name");
@@ -194,7 +200,7 @@ namespace IngProgram
             ProgramStart();
         }
 
-        //SaveIngredients() allows for user input and saves the Ingredients info to the array.
+        //SaveIngredients() saves the ingredients and corresponding information. Also calls calorie cap to see if it exceeds 300
         public static void SaveIngredients(List<Ingredients> IngList, int ingCounter)
         {
             int x = 1;
@@ -253,7 +259,7 @@ namespace IngProgram
                         SaveIngredients(IngList, ingCounter);
                     }
 
-                    //Turned to a double to allow for usage of commas if values are les than 1
+                    //Turned to a double to allow for usage of commas if values are less than 1
                     Console.WriteLine("Please enter quantity of: " + IngName + "\n");
                     double IngQuantity = Convert.ToDouble(Console.ReadLine());
 
@@ -333,7 +339,7 @@ namespace IngProgram
                     Console.WriteLine("Please enter calorie count for: " + IngName + "\n");
                     int calCount = Convert.ToInt32(Console.ReadLine());
 
-                    totalCal = totalCal + calCount;
+                    totalCal += calCount;
 
                     //Creating a new Ingredient instance
                     Ingredients newIngredient = new Ingredients(IngName, IngQuantity, UoM, totalCal, foodGroup, calCount);
@@ -342,7 +348,7 @@ namespace IngProgram
 
                     //Adding the new ingredient to the List
                     IngList.Add(newIngredient);
-
+                    //Calling calorie delegate
                     newIngredient.CheckCalorieCount();
                 }
             }
@@ -355,7 +361,7 @@ namespace IngProgram
             }
         }
 
-        //UserSteps methods uses stepCount and saves user's steps to system temporarily (while running).
+        //UserSteps prompts user for recipe steps and adds them to the stepList
         public static void UserSteps(List<UserSteps> stepList, int userStepCount)
         {
             int x = 1;
@@ -378,8 +384,10 @@ namespace IngProgram
             }
         }
 
+        //FactorRecipeQuantities reads through 'Recipe' prompting user for which recipe to factor, then goes to factor method
         public static void FactorRecipeQuantities()
         {
+            //If no recipes are currently added in system
             if (Recipes.Count == 0)
             {
                 Console.WriteLine("No recipes to factor, please add a recipe first \n");
@@ -389,7 +397,7 @@ namespace IngProgram
             Console.WriteLine("Enter the name of the recipe you want to factor - '0' to return to menu\n");
 
             int index = 1;
-
+            //Display available recipes to user
             foreach (var recipe in Recipes)
             {
                 Console.WriteLine($"{index++}. {recipe.Key}");
@@ -402,7 +410,7 @@ namespace IngProgram
                 ProgramStart();
                 return;
             }
-
+            //If user selects a valid recipe, go to factor method
             if (Recipes.ContainsKey(recipeName))
             {
                 Recipe selectedRecipe = Recipes[recipeName];
@@ -415,15 +423,16 @@ namespace IngProgram
             }
         }
 
+        //CalorieCountReached() Makes use of the delegate, this method simply prints in red when user exceeds 300 calories
         public static void CalorieCountReached(int totalCal)
         {
             Console.ForegroundColor = ConsoleColor.Red;
+
             Console.WriteLine($"\nCalorie Count exceeds 300! Total Calorie Count: {totalCal}\n");
             Console.ForegroundColor = ConsoleColor.White;
         }
 
-        //FactorIngredients() allows user to scale the factor of IngQuantity or follows necessary actions (exit or proceed to steps).
-        //UoM is scaled accordingly in FactorUpdate, measurements are converted to more appropriate values.
+        //FactorIngredients() Confirms user input, and prompts for a valid factor option - if recipe is factored, factorUpdate is called
         public static void FactorIngredients(List<Ingredients> IngList, List<UserSteps> stepList, string recName)
         {
             double factorScale;
@@ -462,11 +471,11 @@ namespace IngProgram
                             //Retry until a valid choice has been selected
                             continue;
                     }
-
+                    //Calls FactorUpdate, updating recipe and printing it
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"Here is the updated recipe for '{recName}': \n");
                     FactorUpdate(IngList, factorScale);
-                    
+
                     Console.ForegroundColor = ConsoleColor.White;
                     factorScaleCheck = true;
                 }
@@ -481,14 +490,14 @@ namespace IngProgram
                     factorCheck = Console.ReadLine();
                 }
             }
-
+            //Asks user if theyd like to reset the factor values
             Console.WriteLine($"Would you like to reset the quantities of '{recName}'? Yes or No\n");
             string resetChoice = Console.ReadLine().ToLower();
 
             if (resetChoice == "yes" || resetChoice == "y")
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"Here is the recipe for {recName} with the original values:\n");               
+                Console.WriteLine($"Here is the recipe for {recName} with the original values:\n");
                 OriginalRecipe(IngList, stepList, recName);
                 Console.ForegroundColor = ConsoleColor.White;
 
@@ -501,6 +510,7 @@ namespace IngProgram
             }
         }
 
+        //FactorUpdate() takes users values and factors them accordingly - scaled so as to convert measurments correctly
         public static void FactorUpdate(List<Ingredients> IngList, double factorScale)
         {
             foreach (var ingredient in IngList)
@@ -560,12 +570,12 @@ namespace IngProgram
                         updatedUoM = "Teaspoon/s";
                     }
                 }
-
+                //Display recipe to user with updated factor applied
                 Console.WriteLine($"{updatedQuantity} {updatedUoM} - {ingredient.IngName}");
                 Console.WriteLine($"Food Group: {ingredient.foodGroup}");
                 Console.WriteLine($"Calorie Count: {Math.Round(updatedCals)} \n");
 
-            
+
             }
         }
 
@@ -610,7 +620,7 @@ namespace IngProgram
             }
 
             int index = 1;
-
+            //Displays avaliable recipes to user
             foreach (var recipe in Recipes)
             {
                 Console.WriteLine($"{index++}. {recipe.Key}");
