@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part1-ST10306640\\CalorieUnitTest\\CalorieUnitTest.csproj": {}
+    "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\CalorieUnitTest\\CalorieUnitTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part1-ST10306640\\CalorieUnitTest\\CalorieUnitTest.csproj": {
+    "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\CalorieUnitTest\\CalorieUnitTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part1-ST10306640\\CalorieUnitTest\\CalorieUnitTest.csproj",
+        "projectUniqueName": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\CalorieUnitTest\\CalorieUnitTest.csproj",
         "projectName": "CalorieUnitTest",
-        "projectPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part1-ST10306640\\CalorieUnitTest\\CalorieUnitTest.csproj",
+        "projectPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\CalorieUnitTest\\CalorieUnitTest.csproj",
         "packagesPath": "C:\\Users\\demos\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part1-ST10306640\\CalorieUnitTest\\obj\\",
+        "outputPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\CalorieUnitTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\demos\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part1-ST10306640\\POE-Part1-Code\\POE-Part1-Code.csproj": {
-                "projectPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part1-ST10306640\\POE-Part1-Code\\POE-Part1-Code.csproj"
+              "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\POE-Part2-Code\\POE-Part2-Code.csproj": {
+                "projectPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\POE-Part2-Code\\POE-Part2-Code.csproj"
               }
             }
           }
@@ -90,14 +90,14 @@
         }
       }
     },
-    "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part1-ST10306640\\POE-Part1-Code\\POE-Part1-Code.csproj": {
+    "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\POE-Part2-Code\\POE-Part2-Code.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part1-ST10306640\\POE-Part1-Code\\POE-Part1-Code.csproj",
-        "projectName": "POE-Part1-Code",
-        "projectPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part1-ST10306640\\POE-Part1-Code\\POE-Part1-Code.csproj",
+        "projectUniqueName": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\POE-Part2-Code\\POE-Part2-Code.csproj",
+        "projectName": "POE-Part2-Code",
+        "projectPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\POE-Part2-Code\\POE-Part2-Code.csproj",
         "packagesPath": "C:\\Users\\demos\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part1-ST10306640\\POE-Part1-Code\\obj\\",
+        "outputPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\POE-Part2-Code\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\demos\\AppData\\Roaming\\NuGet\\NuGet.Config",

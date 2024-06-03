@@ -378,14 +378,14 @@
           }
         }
       },
-      "POE-Part1-Code/1.0.0": {
+      "POE-Part2-Code/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "compile": {
-          "bin/placeholder/POE-Part1-Code.dll": {}
+          "bin/placeholder/POE-Part2-Code.dll": {}
         },
         "runtime": {
-          "bin/placeholder/POE-Part1-Code.dll": {}
+          "bin/placeholder/POE-Part2-Code.dll": {}
         }
       }
     }
@@ -981,10 +981,10 @@
         "version.txt"
       ]
     },
-    "POE-Part1-Code/1.0.0": {
+    "POE-Part2-Code/1.0.0": {
       "type": "project",
-      "path": "../POE-Part1-Code/POE-Part1-Code.csproj",
-      "msbuildProject": "../POE-Part1-Code/POE-Part1-Code.csproj"
+      "path": "../POE-Part2-Code/POE-Part2-Code.csproj",
+      "msbuildProject": "../POE-Part2-Code/POE-Part2-Code.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -993,7 +993,7 @@
       "NUnit >= 3.14.0",
       "NUnit.Analyzers >= 3.9.0",
       "NUnit3TestAdapter >= 4.5.0",
-      "POE-Part1-Code >= 1.0.0",
+      "POE-Part2-Code >= 1.0.0",
       "coverlet.collector >= 6.0.0"
     ]
   },
@@ -1003,11 +1003,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part1-ST10306640\\CalorieUnitTest\\CalorieUnitTest.csproj",
+      "projectUniqueName": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\CalorieUnitTest\\CalorieUnitTest.csproj",
       "projectName": "CalorieUnitTest",
-      "projectPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part1-ST10306640\\CalorieUnitTest\\CalorieUnitTest.csproj",
+      "projectPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\CalorieUnitTest\\CalorieUnitTest.csproj",
       "packagesPath": "C:\\Users\\demos\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part1-ST10306640\\CalorieUnitTest\\obj\\",
+      "outputPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\CalorieUnitTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\demos\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1024,8 +1024,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part1-ST10306640\\POE-Part1-Code\\POE-Part1-Code.csproj": {
-              "projectPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part1-ST10306640\\POE-Part1-Code\\POE-Part1-Code.csproj"
+            "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\POE-Part2-Code\\POE-Part2-Code.csproj": {
+              "projectPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\POE-Part2-Code\\POE-Part2-Code.csproj"
             }
           }
         }

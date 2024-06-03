@@ -12,7 +12,7 @@
           "NUnit": "3.14.0",
           "NUnit.Analyzers": "3.9.0",
           "NUnit3TestAdapter": "4.5.0",
-          "POE-Part1-Code": "1.0.0",
+          "POE-Part2-Code": "1.0.0",
           "coverlet.collector": "6.0.0"
         },
         "runtime": {
@@ -317,9 +317,9 @@
       "NUnit.Analyzers/3.9.0": {},
       "NUnit3TestAdapter/4.5.0": {},
       "System.Reflection.Metadata/1.6.0": {},
-      "POE-Part1-Code/1.0.0": {
+      "POE-Part2-Code/1.0.0": {
         "runtime": {
-          "POE-Part1-Code.dll": {}
+          "POE-Part2-Code.dll": {}
         }
       }
     }
@@ -421,7 +421,7 @@
       "path": "system.reflection.metadata/1.6.0",
       "hashPath": "system.reflection.metadata.1.6.0.nupkg.sha512"
     },
-    "POE-Part1-Code/1.0.0": {
+    "POE-Part2-Code/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

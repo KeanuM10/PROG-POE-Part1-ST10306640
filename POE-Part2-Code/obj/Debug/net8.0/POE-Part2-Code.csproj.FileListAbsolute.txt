@@ -1,0 +1,15 @@
+C:\Users\demos\OneDrive\Documents\GitHub\PROG-POE-Part2-ST10306640\POE-Part2-Code\bin\Debug\net8.0\POE-Part2-Code.exe
+C:\Users\demos\OneDrive\Documents\GitHub\PROG-POE-Part2-ST10306640\POE-Part2-Code\bin\Debug\net8.0\POE-Part2-Code.deps.json
+C:\Users\demos\OneDrive\Documents\GitHub\PROG-POE-Part2-ST10306640\POE-Part2-Code\bin\Debug\net8.0\POE-Part2-Code.runtimeconfig.json
+C:\Users\demos\OneDrive\Documents\GitHub\PROG-POE-Part2-ST10306640\POE-Part2-Code\bin\Debug\net8.0\POE-Part2-Code.dll
+C:\Users\demos\OneDrive\Documents\GitHub\PROG-POE-Part2-ST10306640\POE-Part2-Code\bin\Debug\net8.0\POE-Part2-Code.pdb
+C:\Users\demos\OneDrive\Documents\GitHub\PROG-POE-Part2-ST10306640\POE-Part2-Code\obj\Debug\net8.0\POE-Part2-Code.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\demos\OneDrive\Documents\GitHub\PROG-POE-Part2-ST10306640\POE-Part2-Code\obj\Debug\net8.0\POE-Part2-Code.AssemblyInfoInputs.cache
+C:\Users\demos\OneDrive\Documents\GitHub\PROG-POE-Part2-ST10306640\POE-Part2-Code\obj\Debug\net8.0\POE-Part2-Code.AssemblyInfo.cs
+C:\Users\demos\OneDrive\Documents\GitHub\PROG-POE-Part2-ST10306640\POE-Part2-Code\obj\Debug\net8.0\POE-Part2-Code.csproj.CoreCompileInputs.cache
+C:\Users\demos\OneDrive\Documents\GitHub\PROG-POE-Part2-ST10306640\POE-Part2-Code\obj\Debug\net8.0\POE-Part2-Code.sourcelink.json
+C:\Users\demos\OneDrive\Documents\GitHub\PROG-POE-Part2-ST10306640\POE-Part2-Code\obj\Debug\net8.0\POE-Part2-Code.dll
+C:\Users\demos\OneDrive\Documents\GitHub\PROG-POE-Part2-ST10306640\POE-Part2-Code\obj\Debug\net8.0\refint\POE-Part2-Code.dll
+C:\Users\demos\OneDrive\Documents\GitHub\PROG-POE-Part2-ST10306640\POE-Part2-Code\obj\Debug\net8.0\POE-Part2-Code.pdb
+C:\Users\demos\OneDrive\Documents\GitHub\PROG-POE-Part2-ST10306640\POE-Part2-Code\obj\Debug\net8.0\POE-Part2-Code.genruntimeconfig.cache
+C:\Users\demos\OneDrive\Documents\GitHub\PROG-POE-Part2-ST10306640\POE-Part2-Code\obj\Debug\net8.0\ref\POE-Part2-Code.dll

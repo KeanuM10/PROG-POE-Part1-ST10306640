@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RLM+rHLZ//AHpGnwy/Zab8TnS7nilLA18LYZiGn7qLmlGlb6rY20yfvA1IqadgdWRLlYLOahAUPZRcxd0vwnPw==",
+  "dgSpecHash": "V7wMyKvmsNpNQ0UncVQBIY53pCV+UmSeOYmPGhB07iRTB5It5BDwn9otbJPiXjHHjaYrVdhadmq6S+I/1xkm9g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part1-ST10306640\\CalorieUnitTest\\CalorieUnitTest.csproj",
+  "projectFilePath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\CalorieUnitTest\\CalorieUnitTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\demos\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\demos\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CalorieUnitTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c828f349f48105a423fc14adb77f7bda8c4ee827")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ce409f0b8cd49fb2103ac1e7cfbb6cb4e1436bd4")]
 [assembly: System.Reflection.AssemblyProductAttribute("CalorieUnitTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CalorieUnitTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
