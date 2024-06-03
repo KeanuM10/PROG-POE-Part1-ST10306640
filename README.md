@@ -13,17 +13,17 @@ Features:
 - Error Handling: The system includes error handling mechanisms to ensure smooth user interaction and prevent crashes due to invalid inputs.
 
 How to Use:
-# Run the Application: Execute the IngredientProgram.cs file in a C# environment.
+- Run the Application: Execute the IngredientProgram.cs file in a C# environment.
 
-# Menu Navigation: Upon running the application, users are presented with a menu where they can choose various options:
+- Menu Navigation: Upon running the application, users are presented with a menu where they can choose various options:
 
-# Add a New Recipe: Allows users to add a new recipe along with its ingredients and steps.
+- Add a New Recipe: Allows users to add a new recipe along with its ingredients and steps.
 
-# View a Recipe: Enables users to view the details of a specific recipe.
+- View a Recipe: Enables users to view the details of a specific recipe.
 
-# Factor Quantities of a Recipe: Lets users scale the quantities of ingredients in a recipe.
+- Factor Quantities of a Recipe: Lets users scale the quantities of ingredients in a recipe.
 
-# Exit: Terminates the application.
+- Exit: Terminates the application.
 
 Follow On-Screen Prompts: Users will be guided through each step of the process, including providing recipe details, selecting scaling factors, and navigating the menu.
 
