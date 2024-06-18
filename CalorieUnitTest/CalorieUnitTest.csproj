@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="C:\Users\demos\OneDrive\Documents\GitHub\PROG-POE-Part2-ST10306640\POE-Part2-Code\POE-Part2-Code.csproj" />
+    <ProjectReference Include="..\POE-Part2-Code\POE-Part2-Code.csproj" />
   </ItemGroup>
 
 </Project>

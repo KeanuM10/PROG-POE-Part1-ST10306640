@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CalorieUnitTest\\CalorieTest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\CalorieUnitTest\\CalorieUnitTest.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CalorieUnitTest\\CalorieUnitTest.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\POE-Part2-Code\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:POE-Part2-Code\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\CalorieUnitTest\\CalorieUnitTest.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CalorieUnitTest\\CalorieUnitTest.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,13 +26,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "CalorieUnitTest.csproj",
               "DocumentMoniker": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\CalorieUnitTest\\CalorieUnitTest.csproj",
               "RelativeDocumentMoniker": "CalorieUnitTest\\CalorieUnitTest.csproj",
               "ToolTip": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\CalorieUnitTest\\CalorieUnitTest.csproj",
               "RelativeToolTip": "CalorieUnitTest\\CalorieUnitTest.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAACGAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABgAAABHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2024-06-03T06:22:43.671Z",
               "EditorCaption": ""
@@ -45,20 +45,20 @@
               "RelativeDocumentMoniker": "CalorieUnitTest\\CalorieTest.cs",
               "ToolTip": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\CalorieUnitTest\\CalorieTest.cs",
               "RelativeToolTip": "CalorieUnitTest\\CalorieTest.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAMAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-03T06:20:15.051Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\POE-Part2-Code\\Program.cs",
               "RelativeDocumentMoniker": "POE-Part2-Code\\Program.cs",
               "ToolTip": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG-POE-Part2-ST10306640\\POE-Part2-Code\\Program.cs",
               "RelativeToolTip": "POE-Part2-Code\\Program.cs",
-              "ViewState": "AQIAAFABAAAAAAAAAAAAAFoBAABJAAAA",
+              "ViewState": "AQIAAGAAAAAAAAAAAAAAAHAAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-03T06:20:12.755Z",
               "EditorCaption": ""
